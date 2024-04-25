@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink, Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faN, faPlay, faV } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -57,15 +57,18 @@ const HeaderBlock = styled.div`
           font-size: 18px;
           color: #333;
           font-weight: bold;
-          &:hover .sub__menu {
+          &:hover .sub__menu li {
             display: block;
           }
 
           .sub__menu {
             position: absolute;
-            display: none;
-            margin-top: 40px;
+            padding-top: 20px;
+            &:hover li {
+              display: block;
+            }
             li {
+              display: none;
               height: 36px;
               font-size: 15px;
               font-weight: normal;
@@ -90,10 +93,12 @@ const Header = () => {
     <HeaderBlock>
       <div className="header__left">
         <div className="img__left">
-          <img src="assets/image/logo_black.png" alt="logo" />
+          <Link to="/">
+            <img src="assets/image/logo_black.png" alt="logo" />
+          </Link>
         </div>
         <div className="img__right">
-          <Link to="/artist"><img src="assets/image/lable.png" alt="lable" /></Link>
+          <img src="assets/image/lable.png" alt="lable" />
         </div>
       </div>
       <div className="header__right">
@@ -126,7 +131,7 @@ const Header = () => {
         <nav className="menu">
           <ul className="menu__group">
             <li>
-              <NavLink to="">COMPANY</NavLink>
+              <NavLink to="/company">COMPANY</NavLink>
               <ul className="sub__menu">
                 <li>
                   <NavLink to="">INTRODUCTION</NavLink>
@@ -140,10 +145,10 @@ const Header = () => {
               </ul>
             </li>
             <li>
-              <NavLink to="">ARTIST</NavLink>
+              <NavLink to="/artist">ARTIST</NavLink>
             </li>
             <li>
-              <NavLink to="">COMMUNITY</NavLink>
+              <NavLink to="/community">COMMUNITY</NavLink>
               <ul className="sub__menu">
                 <li>
                   <NavLink to="">NEWS&amp;NOTICE</NavLink>
