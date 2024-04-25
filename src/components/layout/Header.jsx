@@ -57,15 +57,18 @@ const HeaderBlock = styled.div`
           font-size: 18px;
           color: #333;
           font-weight: bold;
-          &:hover .sub__menu {
+          &:hover .sub__menu li {
             display: block;
           }
 
           .sub__menu {
             position: absolute;
-            display: none;
-            margin-top: 40px;
+            padding-top: 20px;
+            &:hover li {
+              display: block;
+            }
             li {
+              display: none;
               height: 36px;
               font-size: 15px;
               font-weight: normal;
@@ -90,10 +93,10 @@ const Header = () => {
     <HeaderBlock>
       <div className="header__left">
         <div className="img__left">
-          <img src="assets/images/logo_black.png" alt="logo" />
+          <img src="assets/image/logo_black.png" alt="logo" />
         </div>
         <div className="img__right">
-          <img src="assets/images/lable.png" alt="lable" />
+          <img src="assets/image/lable.png" alt="lable" />
         </div>
       </div>
       <div className="header__right">
