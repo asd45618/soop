@@ -1,12 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import HomeView from "./views/HomeView";
+import CompanyView from "./views/CompanyView";
+import ArtistView from "./views/ArtistView";
+import CommunityView from "./views/CommunityView";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomeView />} />
+        <Route path="/company" element={<CompanyView />} />
+        <Route path="/artist" element={<ArtistView />} />
+        <Route path="/community" element={<CommunityView />} />
       </Route>
     </Routes>
   );

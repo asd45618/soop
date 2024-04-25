@@ -53,9 +53,13 @@ const CommunityBlock = styled.div`
               margin-bottom: 30px;
               background: #fff;
               box-shadow: 5px 5px 5px #bfbfbf;
+              &:hover .card__img {
+                opacity: 0.6;
+              }
               .card__img {
                 width: 340px;
                 height: 425px;
+                transition: all 0.4s;
                 img {
                   width: 100%;
                   height: 100%;
