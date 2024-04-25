@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faN, faPlay, faV } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -57,18 +57,15 @@ const HeaderBlock = styled.div`
           font-size: 18px;
           color: #333;
           font-weight: bold;
-          &:hover .sub__menu li {
+          &:hover .sub__menu {
             display: block;
           }
 
           .sub__menu {
             position: absolute;
-            padding-top: 20px;
-            &:hover li {
-              display: block;
-            }
+            display: none;
+            margin-top: 40px;
             li {
-              display: none;
               height: 36px;
               font-size: 15px;
               font-weight: normal;
@@ -96,7 +93,7 @@ const Header = () => {
           <img src="assets/image/logo_black.png" alt="logo" />
         </div>
         <div className="img__right">
-          <img src="assets/image/lable.png" alt="lable" />
+          <Link to="/artist"><img src="assets/image/lable.png" alt="lable" /></Link>
         </div>
       </div>
       <div className="header__right">
