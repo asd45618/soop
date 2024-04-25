@@ -11,12 +11,13 @@ import sz2 from "@/assets/image/sz2.jpg";
 
 const SliderSectionblock = styled.div`
   position: relative;
+  padding: 10px 0 100px;
   .slick-slide {
     height: 40vw;
     background: 100% top / cover no-repeat;
     text-align: right;
     img {
-      width: 85%;
+      width: 88%;
       float: right;
     }
   }

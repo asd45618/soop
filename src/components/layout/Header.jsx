@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faN, faPlay, faV } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -90,10 +90,10 @@ const Header = () => {
     <HeaderBlock>
       <div className="header__left">
         <div className="img__left">
-          <img src="assets/images/logo_black.png" alt="logo" />
+          <img src="assets/image/logo_black.png" alt="logo" />
         </div>
         <div className="img__right">
-          <img src="assets/images/lable.png" alt="lable" />
+          <Link to="/artist"><img src="assets/image/lable.png" alt="lable" /></Link>
         </div>
       </div>
       <div className="header__right">
