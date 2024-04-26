@@ -135,7 +135,15 @@ const PhotoBlock = styled.div`
   }
 `;
 
-const Photo = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
+const Photo = ({
+  currentArtistData,
+  lang,
+  setLang,
+  screen,
+  setScreen,
+  currentPage,
+  itemsPerPage,
+}) => {
   return (
     <PhotoBlock>
       <div className="photo__title">
@@ -204,13 +212,18 @@ const Photo = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
         <div className="photo__wrapper__list">
           <div className="photo__wrapper__list__photo">
             <ul>
-              {currentArtistData.photo.map((val, idx) => (
-                <li key={idx}>
-                  <a href="#">
-                    <img src={val} alt={val} />
-                  </a>
-                </li>
-              ))}
+              {currentArtistData.photo
+                .slice(
+                  itemsPerPage * (currentPage - 1),
+                  itemsPerPage * currentPage
+                )
+                .map((val, idx) => (
+                  <li key={idx}>
+                    <a href="#">
+                      <img src={val} alt={val} />
+                    </a>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>

@@ -24,10 +24,15 @@ const LeftMenuBlock = styled.div`
   }
 `;
 
-const LeftMenu = ({ artistData, currentArtist, setCurrentArtist }) => {
+const LeftMenu = ({
+  artistData,
+  currentArtist,
+  setCurrentArtist,
+  setCurrentPage,
+}) => {
   const clickMenu = (eName) => {
     setCurrentArtist(eName);
-    // 클릭 시 클릭한 버튼 색 바꾸기 #333
+    setCurrentPage(1);
   };
 
   return (

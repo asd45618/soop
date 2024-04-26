@@ -141,7 +141,15 @@ const VideoBlock = styled.div`
   }
 `;
 
-const Video = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
+const Video = ({
+  currentArtistData,
+  lang,
+  setLang,
+  screen,
+  setScreen,
+  currentPage,
+  itemsPerPage,
+}) => {
   const [currentVideo, setCurrentVideo] = useState("");
 
   useEffect(() => {
@@ -229,18 +237,23 @@ const Video = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
         </div>
         <div className="video__wrapper__list">
           <div className="list__wrapper">
-            {currentArtistData.video.map((val, idx) => (
-              <ul
-                className="video__list"
-                onClick={() => setCurrentVideo(val.url)}
-                key={idx}
-              >
-                <li>
-                  <img src={val.img} alt={val.text} />
-                </li>
-                <li>{val.text}</li>
-              </ul>
-            ))}
+            {currentArtistData.video
+              .slice(
+                itemsPerPage * (currentPage - 1),
+                itemsPerPage * currentPage
+              )
+              .map((val, idx) => (
+                <ul
+                  className="video__list"
+                  onClick={() => setCurrentVideo(val.url)}
+                  key={idx}
+                >
+                  <li>
+                    <img src={val.img} alt={val.text} />
+                  </li>
+                  <li>{val.text}</li>
+                </ul>
+              ))}
           </div>
         </div>
       </div>

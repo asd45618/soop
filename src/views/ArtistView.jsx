@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Profile from "../components/artist/Profile";
 import Photo from "../components/artist/Photo";
 import Video from "../components/artist/Video";
+import Pagination from "../components/layout/Pagination";
 
 const ArtistViewBlock = styled.div`
   text-align: center;
@@ -31,14 +32,21 @@ const ArtistViewBlock = styled.div`
     }
     .info {
       display: flex;
+      .pagination__view {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 `;
-
 const ArtistView = () => {
   const [currentArtist, setCurrentArtist] = useState("GONG YOO");
   const [lang, setLang] = useState("kor");
   const [screen, setScreen] = useState("profile");
+  const [currentPage, setCurrentPage] = useState(1);
+  const photoItemsPerPage = 24;
+  const videoItemsPerPage = 12;
+
   const artistData = [
     {
       mainPhoto: "/assets/image/artistMainImg1.jpg",
@@ -121,6 +129,30 @@ const ArtistView = () => {
         "/assets/image/artistPhoto4.jpg",
         "/assets/image/artistPhoto5.jpg",
         "/assets/image/artistPhoto6.jpg",
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
       ],
       video: [
         {
@@ -142,6 +174,66 @@ const ArtistView = () => {
           img: "/assets/image/yooVideoImg4.jpg",
           url: "https://www.youtube.com/embed/9-YV03gmy1c?si=pxGuQ3-HJP3eu-aS",
           text: "[숲메이킹] TERRA Making film ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg1.jpg",
+          url: "https://www.youtube.com/embed/whGHlASdjYU?si=gHZmnbnZ6hzs-NTE",
+          text: "[KANU] 카누 워케이션 카페 (60s) ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg2.jpg",
+          url: "https://www.youtube.com/embed/KXKLTopoDg4?si=x7-nNu1ieo6cidi3",
+          text: "[숲메이킹] TOM FORD BEAUTY Making ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg3.jpg",
+          url: "https://www.youtube.com/embed/eNB0sgm0698?si=Lj87CmiKbxoJAxeD",
+          text: "[숲메이킹] SK Enmove Making film ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg4.jpg",
+          url: "https://www.youtube.com/embed/9-YV03gmy1c?si=pxGuQ3-HJP3eu-aS",
+          text: "[숲메이킹] TERRA Making film ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg1.jpg",
+          url: "https://www.youtube.com/embed/whGHlASdjYU?si=gHZmnbnZ6hzs-NTE",
+          text: "[KANU] 카누 워케이션 카페 (60s) ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg2.jpg",
+          url: "https://www.youtube.com/embed/KXKLTopoDg4?si=x7-nNu1ieo6cidi3",
+          text: "[숲메이킹] TOM FORD BEAUTY Making ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg3.jpg",
+          url: "https://www.youtube.com/embed/eNB0sgm0698?si=Lj87CmiKbxoJAxeD",
+          text: "[숲메이킹] SK Enmove Making film ...",
+        },
+        {
+          img: "/assets/image/yooVideoImg4.jpg",
+          url: "https://www.youtube.com/embed/9-YV03gmy1c?si=pxGuQ3-HJP3eu-aS",
+          text: "[숲메이킹] TERRA Making film ...",
+        },
+        {
+          img: "/assets/image/uckVideoImg1.jpg",
+          url: "https://www.youtube.com/embed/kqQXDVbn0l8?si=Cw3FZrZXyef0HG5e",
+          text: "[파과] 2024 창작 뮤지컬 #파과 HIGHLIGHT ...",
+        },
+        {
+          img: "/assets/image/uckVideoImg2.jpg",
+          url: "https://www.youtube.com/embed/q9QzkuD8u-Y?si=2cAgaP4ZOV0ZSaKx",
+          text: "극과 극 매력의 테스토스테론 폭발 현장 │ 재친구 Ep ...",
+        },
+        {
+          img: "/assets/image/uckVideoImg3.jpg",
+          url: "https://www.youtube.com/embed/JIX0uXlYUX0?si=N0eoBnbp65WGWTDy",
+          text: "[숲메이킹] 사연있는 나쁜 남자, 킬러 '투우' 로 돌 ...",
+        },
+        {
+          img: "/assets/image/uckVideoImg4.jpg",
+          url: "https://www.youtube.com/embed/5Hb3kXyl1Nw?si=wVYgbCcQoL9HB_eN",
+          text: "왜 이렇게 냉장고에 진심인데.. ...",
         },
       ],
     },
@@ -229,6 +321,30 @@ const ArtistView = () => {
         "/assets/image/uckMainImg4.jpg",
         "/assets/image/uckMainImg5.jpg",
         "/assets/image/uckMainImg6.jpg",
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
       ],
       video: [
         {
@@ -574,9 +690,15 @@ const ArtistView = () => {
       ],
     },
   ];
+
+  const onClick = (page) => {
+    setCurrentPage(page);
+  };
+
   const currentArtistData = artistData.filter(
     (val) => val.eName === currentArtist
   );
+
   return (
     <ArtistViewBlock>
       <div className="artist__wrapper">
@@ -590,6 +712,7 @@ const ArtistView = () => {
             artistData={artistData}
             currentArtist={currentArtist}
             setCurrentArtist={setCurrentArtist}
+            setCurrentPage={setCurrentPage}
           />
           {screen === "profile" ? (
             <Profile
@@ -600,21 +723,42 @@ const ArtistView = () => {
               setScreen={setScreen}
             />
           ) : screen === "photo" ? (
-            <Photo
-              currentArtistData={currentArtistData[0]}
-              lang={lang}
-              setLang={setLang}
-              screen={screen}
-              setScreen={setScreen}
-            />
+            <div className="pagination__view">
+              <Photo
+                currentArtistData={currentArtistData[0]}
+                lang={lang}
+                setLang={setLang}
+                screen={screen}
+                setScreen={setScreen}
+                currentPage={currentPage}
+                itemsPerPage={photoItemsPerPage}
+              />
+              <Pagination
+                currentPage={currentPage}
+                totalItems={currentArtistData[0].photo.length}
+                itemsPerPage={photoItemsPerPage}
+                onClick={onClick}
+              />
+            </div>
           ) : (
-            <Video
-              currentArtistData={currentArtistData[0]}
-              lang={lang}
-              setLang={setLang}
-              screen={screen}
-              setScreen={setScreen}
-            />
+            <div className="pagination__view">
+              <Video
+                currentArtistData={currentArtistData[0]}
+                lang={lang}
+                setLang={setLang}
+                screen={screen}
+                videoItemsPerPage
+                setScreen={setScreen}
+                currentPage={currentPage}
+                itemsPerPage={videoItemsPerPage}
+              />
+              <Pagination
+                currentPage={currentPage}
+                totalItems={currentArtistData[0].video.length}
+                itemsPerPage={videoItemsPerPage}
+                onClick={onClick}
+              />
+            </div>
           )}
         </div>
       </div>

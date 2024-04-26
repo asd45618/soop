@@ -4,7 +4,7 @@ import { RxSlash } from "react-icons/rx";
 
 const ProfileBlock = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 1380px;
   .profile__img {
     width: 576px;
@@ -185,6 +185,21 @@ const ProfileBlock = styled.div`
         height: 430px;
         padding-top: 30px;
         overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+          cursor: pointer;
+          background: rgba(102, 153, 51, 0.6); /* 스크롤바 막대 색상 */
+          border-radius: 12px;
+          &:hover {
+            background-color: rgba(102, 153, 51, 0.4);
+          }
+        }
+        &::-webkit-scrollbar-track {
+          background: rgba(102, 153, 51, 0.2); /* 스크롤바 뒷 배경 색상 */
+          border-radius: 12px;
+        }
         ul {
           li {
             list-style: circle;
