@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ArtistMenu from "@/components/home/ArtistMenu";
 import SliderSection from "@/components/home/SliderSection";
 import SliderSection2 from "@/components/home/SliderSection2";
 import Video from "@/components/home/Video";
@@ -11,7 +10,6 @@ const HomeViewBlock = styled.div``;
 const HomeView = () => {
   return (
     <HomeViewBlock>
-      <ArtistMenu />
       <SliderSection />
       <SliderSection2 />
       <Video />
