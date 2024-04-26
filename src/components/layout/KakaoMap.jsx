@@ -1,11 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useState, useEffect } from "react";
+import styled from "styled-components";
 
 const KakaoMapBlock = styled.div`
-  .map_wrap, .map_wrap * {
+  .map_wrap,
+  .map_wrap * {
     margin: 0;
     padding: 0;
-    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
     font-size: 14px;
   }
   .map_wrap {
@@ -38,7 +39,10 @@ const KakaoMap = () => {
 
   useEffect(() => {
     if (map) {
-      const markerPosition = new kakao.maps.LatLng(37.51144026093823, 127.0373280973263);
+      const markerPosition = new kakao.maps.LatLng(
+        37.51144026093823,
+        127.0373280973263
+      );
       const marker = new kakao.maps.Marker({
         position: markerPosition,
       });
@@ -46,14 +50,18 @@ const KakaoMap = () => {
       marker.setMap(map);
       const content = '<div style="padding:10px;">매니지먼트 숲</div>';
       infowindow.setContent(content);
-        infowindow.open(map, marker);
-            }
-        }, [map, infowindow]);
+      infowindow.open(map, marker);
+    }
+  }, [map, infowindow]);
 
   return (
     <KakaoMapBlock className="row">
       <div className="map_wrap">
-        <div id="map" ref={mapRef} style={{ width: '100%', height: '100%', overflow: 'hidden' }}></div>
+        <div
+          id="map"
+          ref={mapRef}
+          style={{ width: "100%", height: "100%", overflow: "hidden" }}
+        ></div>
       </div>
     </KakaoMapBlock>
   );
