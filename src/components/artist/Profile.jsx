@@ -232,8 +232,6 @@ const ProfileBlock = styled.div`
 `;
 
 const Profile = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
-  console.log(currentArtistData);
-
   const snsBtn = (val) => {
     if (Object.keys(val)[0] === "korea") {
       return "Korea official fancafe";
