@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import LeftMenu from "../components/artist/LeftMenu";
 import styled from "styled-components";
 import Profile from "../components/artist/Profile";
+import Photo from "../components/artist/Photo";
+import Video from "../components/artist/Video";
 
 const ArtistViewBlock = styled.div`
   text-align: center;
@@ -35,6 +37,8 @@ const ArtistViewBlock = styled.div`
 
 const ArtistView = () => {
   const [currentArtist, setCurrentArtist] = useState("GONG YOO");
+  const [lang, setLang] = useState("kor");
+  const [screen, setScreen] = useState("profile");
   const artistData = [
     {
       mainPhoto: "/assets/image/artistMainImg1.jpg",
@@ -71,7 +75,32 @@ const ArtistView = () => {
           insta: "https://www.instagram.com/gongyoo_official/",
         },
       ],
-      photo: [],
+      photo: [
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
+        "/assets/image/artistPhoto1.webp",
+        "/assets/image/artistPhoto2.webp",
+        "/assets/image/artistPhoto3.jpg",
+        "/assets/image/artistPhoto4.jpg",
+        "/assets/image/artistPhoto5.jpg",
+        "/assets/image/artistPhoto6.jpg",
+      ],
       video: [],
     },
     {
@@ -112,7 +141,32 @@ const ArtistView = () => {
           japan: "https://ticket.pia.jp/piasp/fc/kimjaeuck_close.jsp",
         },
       ],
-      photo: [],
+      photo: [
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
+        "/assets/image/uckMainImg1.jpg",
+        "/assets/image/uckMainImg2.jpg",
+        "/assets/image/uckMainImg3.jpg",
+        "/assets/image/uckMainImg4.jpg",
+        "/assets/image/uckMainImg5.jpg",
+        "/assets/image/uckMainImg6.jpg",
+      ],
       video: [],
     },
     {
@@ -237,9 +291,28 @@ const ArtistView = () => {
         <div className="info">
           <LeftMenu
             artistData={artistData}
+            currentArtist={currentArtist}
             setCurrentArtist={setCurrentArtist}
           />
-          <Profile currentArtistData={currentArtistData[0]} />
+          {screen === "profile" ? (
+            <Profile
+              currentArtistData={currentArtistData[0]}
+              lang={lang}
+              setLang={setLang}
+              screen={screen}
+              setScreen={setScreen}
+            />
+          ) : screen === "photo" ? (
+            <Photo
+              currentArtistData={currentArtistData[0]}
+              lang={lang}
+              setLang={setLang}
+              screen={screen}
+              setScreen={setScreen}
+            />
+          ) : (
+            <Video />
+          )}
         </div>
       </div>
     </ArtistViewBlock>

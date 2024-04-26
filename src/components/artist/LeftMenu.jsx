@@ -16,12 +16,15 @@ const LeftMenuBlock = styled.div`
         &:hover {
           color: #333;
         }
+        &.on {
+          color: #333;
+        }
       }
     }
   }
 `;
 
-const LeftMenu = ({ artistData, setCurrentArtist }) => {
+const LeftMenu = ({ artistData, currentArtist, setCurrentArtist }) => {
   const clickMenu = (eName) => {
     setCurrentArtist(eName);
     // 클릭 시 클릭한 버튼 색 바꾸기 #333
@@ -32,7 +35,12 @@ const LeftMenu = ({ artistData, setCurrentArtist }) => {
       <ul>
         {artistData.map((val, idx) => (
           <li key={idx}>
-            <div onClick={() => clickMenu(val.eName)}>{val.eName}</div>
+            <div
+              onClick={() => clickMenu(val.eName)}
+              className={val.eName === currentArtist ? "on" : ""}
+            >
+              {val.eName}
+            </div>
           </li>
         ))}
       </ul>

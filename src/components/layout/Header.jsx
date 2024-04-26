@@ -64,6 +64,7 @@ const HeaderBlock = styled.div`
           .sub__menu {
             position: absolute;
             padding-top: 20px;
+            z-index: 999;
             &:hover li {
               display: block;
             }
