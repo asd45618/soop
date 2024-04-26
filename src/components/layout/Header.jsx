@@ -135,13 +135,13 @@ const Header = () => {
               <NavLink to="/company">COMPANY</NavLink>
               <ul className="sub__menu">
                 <li>
-                  <NavLink to="">INTRODUCTION</NavLink>
+                  <NavLink to="/company">INTRODUCTION</NavLink>
                 </li>
                 <li>
                   <NavLink to="">HISTORY</NavLink>
                 </li>
                 <li>
-                  <NavLink to="">CONTACT US</NavLink>
+                  <NavLink to="/contactUs">CONTACT US</NavLink>
                 </li>
               </ul>
             </li>
