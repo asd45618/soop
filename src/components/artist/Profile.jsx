@@ -4,7 +4,7 @@ import { RxSlash } from "react-icons/rx";
 
 const ProfileBlock = styled.div`
   display: flex;
-  justify-content: right;
+  justify-content: space-around;
   width: 1380px;
   .profile__img {
     width: 576px;
@@ -47,7 +47,6 @@ const ProfileBlock = styled.div`
     }
   }
   .profile__info {
-    padding-left: 60px;
     vertical-align: top;
     text-align: left;
     padding-right: 30px;
@@ -56,14 +55,13 @@ const ProfileBlock = styled.div`
       display: flex;
       border-bottom: 1px solid #e5e5e5;
       width: 100%;
-      margin-top: 10px;
       .info__title__left {
-        width: 60%;
+        width: 70%;
         ul {
           display: block;
           li {
             color: #333;
-            font-size: 49px;
+            font-size: 45px;
             font-weight: 600;
             vertical-align: bottom;
             strong {
@@ -80,7 +78,7 @@ const ProfileBlock = styled.div`
         }
       }
       .info__title__right {
-        width: 40%;
+        width: 30%;
         padding-top: 35px;
         vertical-align: bottom;
         .title__right__lang {
@@ -101,10 +99,10 @@ const ProfileBlock = styled.div`
                 font-weight: 400;
                 cursor: pointer;
                 &:hover {
-                  color: #333;
+                  color: #669933;
                 }
                 &.langOn {
-                  color: #333;
+                  color: #669933;
                 }
               }
             }
@@ -186,8 +184,7 @@ const ProfileBlock = styled.div`
         width: 100%;
         height: 430px;
         padding-top: 30px;
-        overflow: scroll;
-        overflow-x: hidden;
+        overflow-y: scroll;
         ul {
           li {
             list-style: circle;
@@ -259,10 +256,16 @@ const Profile = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
           <div className="info__title__left">
             <ul>
               <li>
-                {currentArtistData.kName}
+                {lang === "kor"
+                  ? currentArtistData.kName
+                  : currentArtistData.eName}
                 <strong>({currentArtistData.birth})</strong>
               </li>
-              <li>{currentArtistData.eName}</li>
+              <li>
+                {lang === "kor"
+                  ? currentArtistData.eName
+                  : currentArtistData.kName}
+              </li>
             </ul>
           </div>
           <div className="info__title__right">
@@ -321,13 +324,17 @@ const Profile = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
           <div className="info__base__left">
             <ul>
               <li>
-                <span>키</span>
+                <span>{lang === "kor" ? "키" : "Height"}</span>
                 <span>{currentArtistData.height}</span>
               </li>
-              {currentArtistData.debut && (
+              {currentArtistData.kdebut && (
                 <li>
-                  <span>데뷔</span>
-                  <span>{currentArtistData.debut}</span>
+                  <span>{lang === "kor" ? "데뷔" : "Debut"}</span>
+                  {lang === "kor" ? (
+                    <span>{currentArtistData.kdebut}</span>
+                  ) : (
+                    <span>{currentArtistData.edebut}</span>
+                  )}
                 </li>
               )}
             </ul>
@@ -337,12 +344,19 @@ const Profile = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
           <h2>WORKS</h2>
           <div className="info__works__wrapper">
             <ul>
-              {currentArtistData.works.map((val, idx) => (
-                <li key={idx}>
-                  <span>{Object.keys(val)}</span>
-                  <span>{Object.values(val)}</span>
-                </li>
-              ))}
+              {lang === "kor"
+                ? currentArtistData.kworks.map((val, idx) => (
+                    <li key={idx}>
+                      <span>{Object.keys(val)}</span>
+                      <span>{Object.values(val)}</span>
+                    </li>
+                  ))
+                : currentArtistData.eworks.map((val, idx) => (
+                    <li key={idx}>
+                      <span>{Object.keys(val)}</span>
+                      <span>{Object.values(val)}</span>
+                    </li>
+                  ))}
             </ul>
           </div>
         </div>

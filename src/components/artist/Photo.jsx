@@ -57,10 +57,10 @@ const PhotoBlock = styled.div`
               font-weight: 400;
               cursor: pointer;
               &:hover {
-                color: #333;
+                color: #669933;
               }
               &.langOn {
-                color: #333;
+                color: #669933;
               }
             }
           }
