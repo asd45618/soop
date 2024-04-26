@@ -11,7 +11,7 @@ import sz2 from "@/assets/image/sz2.jpg";
 
 const SliderSectionblock = styled.div`
   position: relative;
-  padding: 10px 0 100px;
+  padding: 10px 30px 100px;
 
   .slick-slide {
     height: 40vw;
@@ -84,9 +84,15 @@ const SliderSection = () => {
       <div className="artistMenu">
         <ul>
           <li className={activeSlideIndex === 0 ? "active" : ""}>GONG YOO</li>
-          <li className={activeSlideIndex === 1 ? "active" : ""}>KIM JAE-UCK</li>
-          <li className={activeSlideIndex === 2 ? "active" : ""}>NAM JOO-HYUK</li>
-          <li className={activeSlideIndex === 3 ? "active" : ""}>SEO HYUN-JIN</li>
+          <li className={activeSlideIndex === 1 ? "active" : ""}>
+            KIM JAE-UCK
+          </li>
+          <li className={activeSlideIndex === 2 ? "active" : ""}>
+            NAM JOO-HYUK
+          </li>
+          <li className={activeSlideIndex === 3 ? "active" : ""}>
+            SEO HYUN-JIN
+          </li>
           <li className={activeSlideIndex === 4 ? "active" : ""}>SUZY</li>
         </ul>
       </div>
