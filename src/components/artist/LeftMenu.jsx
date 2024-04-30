@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { changeCurrentArtist } from "../../store/artist";
 
 const LeftMenuBlock = styled.div`
   width: 320px;
@@ -24,14 +26,12 @@ const LeftMenuBlock = styled.div`
   }
 `;
 
-const LeftMenu = ({
-  artistData,
-  currentArtist,
-  setCurrentArtist,
-  setCurrentPage,
-}) => {
+const LeftMenu = ({ artistData, setCurrentPage }) => {
+  const dispatch = useDispatch();
+  const currentArtist = useSelector((state) => state.artists.currentArtist);
+
   const clickMenu = (eName) => {
-    setCurrentArtist(eName);
+    dispatch(changeCurrentArtist(eName));
     setCurrentPage(1);
   };
 

@@ -185,7 +185,7 @@ const Community = () => {
       <div className="community__main">
         <div className="card__wrapper">
           <div className="more">
-            <Link to="">
+            <Link to="/community">
               <FontAwesomeIcon icon={faPlusSquare} />
               more
             </Link>

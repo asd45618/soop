@@ -5,6 +5,7 @@ import Profile from "../components/artist/Profile";
 import Photo from "../components/artist/Photo";
 import Video from "../components/artist/Video";
 import Pagination from "../components/layout/Pagination";
+import { useSelector } from "react-redux";
 
 const ArtistViewBlock = styled.div`
   text-align: center;
@@ -40,12 +41,12 @@ const ArtistViewBlock = styled.div`
   }
 `;
 const ArtistView = () => {
-  const [currentArtist, setCurrentArtist] = useState("GONG YOO");
   const [lang, setLang] = useState("kor");
   const [screen, setScreen] = useState("profile");
   const [currentPage, setCurrentPage] = useState(1);
   const photoItemsPerPage = 24;
   const videoItemsPerPage = 12;
+  const currentArtist = useSelector((state) => state.artists.currentArtist);
 
   const artistData = [
     {
@@ -708,12 +709,7 @@ const ArtistView = () => {
           ARTIST
         </h2>
         <div className="info">
-          <LeftMenu
-            artistData={artistData}
-            currentArtist={currentArtist}
-            setCurrentArtist={setCurrentArtist}
-            setCurrentPage={setCurrentPage}
-          />
+          <LeftMenu artistData={artistData} setCurrentPage={setCurrentPage} />
           {screen === "profile" ? (
             <Profile
               currentArtistData={currentArtistData[0]}

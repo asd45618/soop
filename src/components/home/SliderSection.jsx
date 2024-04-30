@@ -8,6 +8,9 @@ import kju2 from "@/assets/image/kju2.jpg";
 import njh2 from "@/assets/image/njh2.jpg";
 import shj2 from "@/assets/image/shj2.jpg";
 import sz2 from "@/assets/image/sz2.jpg";
+import { useDispatch } from "react-redux";
+import { changeCurrentArtist } from "../../store/artist";
+import { useNavigate } from "react-router-dom";
 
 const SliderSectionblock = styled.div`
   position: relative;
@@ -17,10 +20,12 @@ const SliderSectionblock = styled.div`
     height: 40vw;
     background: 100% top / cover no-repeat;
     text-align: right;
-
-    img {
-      width: 89%;
-      float: right;
+    .slide {
+      img {
+        width: 89%;
+        float: right;
+        cursor: pointer;
+      }
     }
   }
 
@@ -37,6 +42,7 @@ const SliderSectionblock = styled.div`
         margin-bottom: 10px;
         font-size: 20px;
         color: #bbb;
+        cursor: pointer;
       }
 
       li.active {
@@ -49,6 +55,8 @@ const SliderSectionblock = styled.div`
 
 const SliderSection = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const options = {
     autoplay: true,
@@ -62,24 +70,31 @@ const SliderSection = () => {
     },
   };
 
+  const artistSlider = [
+    { img: "./assets/image/gy2.jpg", name: "GONG YOO" },
+    { img: "./assets/image/kju2.jpg", name: "KIM JAE-UCK" },
+    { img: "./assets/image/njh2.jpg", name: "NAM JOO-HYUK" },
+    { img: "./assets/image/shj2.jpg", name: "SEO HYUN-JIN" },
+    { img: "./assets/image/sz2.jpg", name: "SUZY" },
+  ];
+
+  const goToArtist = (name) => {
+    dispatch(changeCurrentArtist(name));
+    navigate("/artist");
+  };
+
   return (
     <SliderSectionblock>
       <Slider {...options}>
-        <div className="slide">
-          <img src={gy2} alt="slide1" />
-        </div>
-        <div className="slide">
-          <img src={kju2} alt="slide2" />
-        </div>
-        <div className="slide">
-          <img src={njh2} alt="slide3" />
-        </div>
-        <div className="slide">
-          <img src={shj2} alt="slide4" />
-        </div>
-        <div className="slide">
-          <img src={sz2} alt="slide5" />
-        </div>
+        {artistSlider.map((val, idx) => (
+          <div className="slide" key={idx}>
+            <img
+              src={val.img}
+              alt={val.name}
+              onClick={() => goToArtist(val.name)}
+            />
+          </div>
+        ))}
       </Slider>
       <div className="artistMenu">
         <ul>

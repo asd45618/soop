@@ -7,6 +7,7 @@ import {
   faInstagram,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 const FooterBlock = styled.div`
   width: 100%;
@@ -98,9 +99,9 @@ const Footer = () => {
         <div className="footer__box">
           <div className="info">
             <div className="footer__logo">
-              <a href="#">
+              <Link to="/">
                 <img src="assets/image/footer__logo.png" alt="footerLogo" />
-              </a>
+              </Link>
             </div>
             <ul>
               <li>MANAGEMENT SOOP</li>
