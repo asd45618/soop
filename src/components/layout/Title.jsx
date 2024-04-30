@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const TitleBlock = styled.div`
     text-align:center;
-    margin:50px 0;
+    margin:12px 0;
     position: relative;
         img{
             width: 100%;
