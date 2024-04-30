@@ -48,43 +48,47 @@ const HeaderBlock = styled.div`
       .menu__group {
         display: flex;
         justify-content: right;
-        & > li:hover #blind {
-          height: 130px;
-        }
+        &:hover .sub__menu li {
+          display: block;
+          }
         li {
           width: 140px;
           text-align: center;
           font-size: 18px;
           color: #333;
           font-weight: bold;
-          &:hover .sub__menu li {
+          &:hover {
             display: block;
+            color:green;
           }
 
           .sub__menu {
             position: absolute;
-            padding-top: 20px;
+            padding-top: 50px;
             z-index: 999;
-            &:hover li {
-              display: block;
-            }
             li {
               display: none;
               height: 36px;
               font-size: 15px;
               font-weight: normal;
+              &:hover {
+                color:#fff;
+              }
             }
           }
         }
         #blind {
           position: absolute;
           left: 0;
-          top: 100px;
+          top: 110px;
           width: 100%;
           height: 0px;
           z-index: 1;
-          background: rgba(0, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.3);
         }
+      }
+      &:hover #blind {
+        height: 125px;
       }
     }
   }
@@ -147,6 +151,9 @@ const Header = () => {
             </li>
             <li>
               <NavLink to="/artist">ARTIST</NavLink>
+            </li>
+            <li>
+              <NavLink to="/product">PRODUCT</NavLink>
             </li>
             <li>
               <NavLink to="/community">COMMUNITY</NavLink>
