@@ -7,9 +7,11 @@ const ProductDetailView = () => {
     const location = useLocation()
     const { item } = location.state
     return (
-            <div className="row">
-                <Title title="상품설명"/>
-                <ProductDetailSection product={item} />
+            <div>
+                <Title title="" />
+                <div className="row">
+                    <ProductDetailSection product={item}/>
+                </div>
             </div>
     );
 };
