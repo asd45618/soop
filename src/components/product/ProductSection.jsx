@@ -1,138 +1,163 @@
-import React from 'react';
-import ProductList from './ProductList'
+import React, {useState, useRef, useEffect} from 'react';
+import { fetchProducts  } from '@/store/product'
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components'
+import { BsCartPlusFill, BsCartPlus  } from "react-icons/bs";
+import { PiSpinnerLight } from "react-icons/pi";
+import { Link } from 'react-router-dom'
+import { cartDB } from '@/assets/firebase'
 
-const ProductSectionBlock = styled.div`
-    margin: 100px auto;
-    ul { 
-        display: flex;
-        flex-wrap: wrap;
+const ProductSectionBlock = styled.div``
+
+const UlBlock = styled.ul`
+    border: 0px solid #000;
+    display: flex;
+    flex-wrap: wrap;
+    list-style:none; 
+    margin-top:50px; 
+`
+const ListBlock = styled.li`
+    flex: 0 0 21%;
+    margin: 20px 2%;
+`
+
+const LoadingBlock = styled.div`
+    display:flex; justify-content:center; 
+    margin:100px 0; 
+    .loadIcon {
+        font-size : 80px; 
+        animation : loadSpin 5s linear infinite;
+    }
+    @keyframes loadSpin {
+        0% { transform : rotate(0deg) }
+        100% { transform : rotate(3turn) }
     }
 `
 
-const ProductSection = () => {
+// const ButtonBlock = styled.div`
+//     button {
+//         margin:50px 5px; padding:5px 10px; 
+//         &.on { background:red; color:#fff }
+//     }
+// `
+const ProductInsert = styled.div`
+    text-align:center;
+    margin:50px 0;
+    a { padding:10px 20px; background:#999; }
+`
 
-    const products = [
-        {
-          photo: './assets/image/g1.jpg',
-          name: '공유 포토 노트',
-          comment: '※ 1인당 5EA 구매 한정',
-          price: 32000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g2.jpg',
-          name: '김재욱 아코디언 엽서',
-          comment: '※ 1인당 2EA 구매 한정',
-          price: 12000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        {
-          photo: './assets/image/g3.jpg',
-          name: '수지 OST 미니앨범',
-          comment: '※ 1인당 1EA 구매 한정',
-          price: 45000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg','./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        {
-          photo: './assets/image/g4.jpg',
-          name: '서현진 티셔츠',
-          comment: '',
-          price: 58000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g3.jpg',
-          name: '수지 OST 미니앨범',
-          comment: '※ 1인당 1EA 구매 한정',
-          price: 45000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg','./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        {
-          photo: './assets/image/g4.jpg',
-          name: '서현진 티셔츠',
-          comment: '',
-          price: 58000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g1.jpg',
-          name: '공유 포토 노트',
-          comment: '※ 1인당 5EA 구매 한정',
-          price: 32000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g2.jpg',
-          name: '김재욱 아코디언 엽서',
-          comment: '※ 1인당 2EA 구매 한정',
-          price: 12000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        {
-          photo: './assets/image/g1.jpg',
-          name: '공유 포토 노트',
-          comment: '※ 1인당 5EA 구매 한정',
-          price: 32000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g2.jpg',
-          name: '김재욱 아코디언 엽서',
-          comment: '※ 1인당 2EA 구매 한정',
-          price: 12000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        {
-          photo: './assets/image/g3.jpg',
-          name: '수지 OST 미니앨범',
-          comment: '※ 1인당 1EA 구매 한정',
-          price: 45000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg','./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        {
-          photo: './assets/image/g4.jpg',
-          name: '서현진 티셔츠',
-          comment: '',
-          price: 58000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g3.jpg',
-          name: '수지 OST 미니앨범',
-          comment: '※ 1인당 1EA 구매 한정',
-          price: 45000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg','./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        {
-          photo: './assets/image/g4.jpg',
-          name: '서현진 티셔츠',
-          comment: '',
-          price: 58000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g1.jpg',
-          name: '공유 포토 노트',
-          comment: '※ 1인당 5EA 구매 한정',
-          price: 32000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_.jpg']
-        },
-        {
-          photo: './assets/image/g2.jpg',
-          name: '김재욱 아코디언 엽서',
-          comment: '※ 1인당 2EA 구매 한정',
-          price: 12000,
-          icon: ['./assets/image/kr_shopimages_starshipes_prod_icons_ (1).gif']
-        },
-        
-      ]
+const ProductSection = ({title}) => {
+    const dispatch = useDispatch();
 
+    // const admin = useSelector(state=>state.members.admin)
+
+    const carts = useSelector(state=>state.products.carts)
+    const allData = useSelector(state=>state.products.products)
+    const [products, setProducts] = useState(allData)
+    
+
+    // const [changeSort, setChangeSort] = useState("")
+
+    const [loading, setLoading] = useState(false)
+
+    // const sortFlag = useRef(false)
+
+    // const sortProduct = (keyname)=>{
+    //     if (!sortFlag.current) {
+    //         setProducts( (products)=>{
+    //             let sortProducts = [...products]
+    //             return sortProducts.sort( (a, b)=> a[keyname] < b[keyname] ? -1:1) 
+    //         })
+    //     } else {
+    //         setProducts( (products)=>{
+    //             let sortProducts = [...products]
+    //             return sortProducts.sort( (a, b)=> a[keyname] > b[keyname] ? -1:1) 
+    //         })
+    //     }
+    //     sortFlag.current = !sortFlag.current
+    // }
+
+    const cartIdCount = (id) => {
+        let item = carts.find(value=>value.id==id)
+        if (item) {
+            return item.qty
+        } else {
+            return 0
+        }
+    }
+
+    const addToCart = async (id)=>{
+        try {
+            const cartItemRef = cartDB.child(id); // 해당 상품의 레퍼런스 생성
+            const cartItemSnapshot = await cartItemRef.once('value'); // 해당 상품의 스냅샷 가져오기
+            let quantity = 1;
+            if (cartItemSnapshot.exists()) { // 해당 상품이 이미 장바구니에 있는 경우 수량을 증가시킴
+                quantity = cartItemSnapshot.val().qty + 1;
+            }
+            // 장바구니에 상품 추가 또는 업데이트
+            await cartItemRef.set({ id:id, qty:quantity });
+        } catch(error){
+            console.log("오류메시지:", error)
+        }
+    }
+
+    const [loging, setLoging] = useState(false)
+
+    useEffect(()=>{
+        dispatch(fetchProducts())
+    }, [])
+
+    useEffect(()=>{
+        if (allData.length>0) {
+            setLoading(true)
+            if (title=='all') {
+                setProducts(allData)
+            } else {
+                setProducts(allData.filter((item)=>item.category==title))
+            }
+        }
+    }, [allData, title])
+
+    useEffect(()=>{
+        setLoging()
+    }, [])
+
+    if (!loading) {
+        return (
+            <ProductSectionBlock>
+                <LoadingBlock>
+                    <PiSpinnerLight className="loadIcon" />
+                </LoadingBlock>
+                <ProductInsert>
+                    <Link to="/productInsert">상품등록</Link>
+                </ProductInsert>
+           </ProductSectionBlock>
+        );
+    } 
     return (
-        <ProductSectionBlock  className="row">
-            <ul>
-                { products.map((item, index)=><ProductList item={item} key={index} />) }
-            </ul>
+        <ProductSectionBlock className='row'>
+            <UlBlock>
+            {
+                products.map((item, index)=>(
+                    <ListBlock key={index}>
+                        <div className="photo">
+                            <Link to={`/product/${item.title}`} state={{ item : item }}><img src={item.photo} alt={item.title} /></Link>
+                        </div>
+                        <div className="info">
+                            <p><a href="#">{item.name}</a></p>
+                            <p>{parseInt(item.price).toLocaleString()}</p>
+                            { item.inventory!=cartIdCount(item.id) ? <button onClick={ ()=>addToCart(item.id) }><BsCartPlusFill /></button> : <button><BsCartPlus /></button> }
+                            { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }개 남았습니다.</span> : <span>품절!!</span>}
+                        </div>
+                    </ListBlock>
+                ))
+            }
+            </UlBlock>
+            {/* { loging && */}
+                <ProductInsert>
+                    <Link to="/productInsert">상품등록</Link>
+                </ProductInsert>
+            {/* } */}
         </ProductSectionBlock>
     );
 };
