@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { BsCartPlusFill } from "react-icons/bs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleXmark,
@@ -128,6 +129,7 @@ const HeaderBlock = styled.div`
     text-align: right;
     padding-right: 30px;
     .login {
+      padding: 5px 50px 5px 5px;
       span {
         cursor: pointer;
       }
@@ -167,7 +169,7 @@ const HeaderBlock = styled.div`
 
           .sub__menu {
             position: absolute;
-            padding-top: 45px;
+            padding-top: 33px;
             z-index: 999;
             li {
               display: none;
@@ -197,9 +199,18 @@ const HeaderBlock = styled.div`
     }
   }
 `;
+const ItemCount = styled.div`
+  position: absolute;
+  top: -7px;
+  right: 35px;
+  font-size: 25px;
+  color: #669933;
+`
+
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const carts = useSelector(state=>state.products.carts)
 
   const [modalOpen, setModalOpen] = useState(false);
   const currentUser = useSelector((state) => state.members.user);
@@ -239,9 +250,15 @@ const Header = () => {
           ) : (
             <>
               <span onClick={() => navigate("/login")}>로그인 </span>
+              <span>/ </span>
               <span onClick={() => navigate("/join")}>회원가입</span>
             </>
           )}
+          <ItemCount>
+              <Link to="/cart">
+              <BsCartPlusFill />
+              </Link>
+            </ItemCount>
         </div>
         <div className="sns">
           <a href="https://www.facebook.com/soopent" target="_blank">

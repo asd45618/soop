@@ -1,6 +1,6 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/database'
-import 'firebase/compat/storage'
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+import "firebase/compat/storage";
 
 const firebaseConfig = firebase.initializeApp({
   apiKey: "AIzaSyCspPqP1Uz1aFWQYaBWFNKXlo0enhXhbdo",
@@ -10,11 +10,13 @@ const firebaseConfig = firebase.initializeApp({
   storageBucket: "soop-cbb03.appspot.com",
   messagingSenderId: "463838785388",
   appId: "1:463838785388:web:3fa866c927c01ab86dcd49",
-  measurementId: "G-BMRHCXZZVR"
+  measurementId: "G-BMRHCXZZVR",
 });
 
-  const oDB = firebaseConfig.database()
-  export const productDB = oDB.ref('products')
-  export const cartDB = oDB.ref('carts')
+const oDB = firebaseConfig.database();
+export const productDB = oDB.ref("products");
+export const cartDB = oDB.ref("carts");
+export const communityDB = oDB.ref("communitys");
+export const memberDB = oDB.ref("members");
 
-  export const oStorage = firebaseConfig.storage();
+export const oStorage = firebaseConfig.storage();

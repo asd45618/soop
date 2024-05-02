@@ -15,6 +15,49 @@ const IntroductionBlock = styled.div`
     position: relative;
     display: flex;
     justify-content: center;
+<<<<<<< HEAD
+    .box {
+        width:100%;
+        padding: 50px 0;
+        display: flex;
+        margin-bottom: 70px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        .divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%; 
+            width: 1px; 
+            background-color: #ccc; 
+            content: "";
+            padding: 0;
+        }
+        .left{
+            flex:1;
+            ul {
+                text-align:left;
+                padding-left:100px;
+                font-size: 15px;
+                    li{
+                        color:#888;
+                        padding:5px;
+                        strong { color:#444; font-weight: 400; }
+                    }
+                }
+            }
+        .right{
+            flex:1;
+            text-align:left;
+            word-break: keep-all;
+            padding-left:100px;
+            font-size: 15px;
+            line-height: 30px;
+            color: #666;
+            letter-spacing: -0.03em;
+        }
+=======
     .divider {
       position: absolute;
       top: 0;
@@ -24,6 +67,7 @@ const IntroductionBlock = styled.div`
       background-color: #ccc;
       content: "";
       padding: 0;
+>>>>>>> 816e6b9b3998edab1d7cef20796b7128ee41377c
     }
     .left {
       flex: 1;
