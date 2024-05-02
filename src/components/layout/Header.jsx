@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faN, faPlay, faV } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -8,6 +8,8 @@ import {
   faInstagram,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMembers, userLogout } from "../../store/member";
 
 const HeaderBlock = styled.div`
   display: flex;
@@ -29,6 +31,11 @@ const HeaderBlock = styled.div`
     width: 50%;
     text-align: right;
     padding-right: 30px;
+    .login {
+      span {
+        cursor: pointer;
+      }
+    }
     .sns {
       padding: 10px 0;
       a {
@@ -50,7 +57,7 @@ const HeaderBlock = styled.div`
         justify-content: right;
         &:hover .sub__menu li {
           display: block;
-          }
+        }
         li {
           width: 140px;
           text-align: center;
@@ -59,7 +66,7 @@ const HeaderBlock = styled.div`
           font-weight: bold;
           &:hover {
             display: block;
-            color:green;
+            color: green;
           }
 
           .sub__menu {
@@ -72,7 +79,7 @@ const HeaderBlock = styled.div`
               font-size: 15px;
               font-weight: normal;
               &:hover {
-                color:#fff;
+                color: #fff;
               }
             }
           }
@@ -94,19 +101,38 @@ const HeaderBlock = styled.div`
   }
 `;
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.members.user);
+
+  useEffect(() => {
+    dispatch(fetchMembers());
+  }, []);
+
   return (
     <HeaderBlock>
       <div className="header__left">
         <div className="img__left">
           <Link to="/">
-            <img src="assets/image/logo_black.png" alt="logo" />
+            <img src="/assets/image/logo_black.png" alt="logo" />
           </Link>
         </div>
         <div className="img__right">
-          <img src="assets/image/lable.png" alt="lable" />
+          <img src="/assets/image/lable.png" alt="lable" />
         </div>
       </div>
       <div className="header__right">
+        <div className="login">
+          {currentUser ? (
+            <span onClick={() => dispatch(userLogout())}>로그아웃</span>
+          ) : (
+            <>
+              <span onClick={() => navigate("/login")}>로그인 </span>
+              <span onClick={() => navigate("/join")}>회원가입</span>
+            </>
+          )}
+        </div>
         <div className="sns">
           <a href="https://www.facebook.com/soopent" target="_blank">
             <FontAwesomeIcon icon={faFacebookF} />

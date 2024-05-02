@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import dayjs from "dayjs";
+import { changeType, fetchCommunity } from "../../store/community";
+import { communityDB } from "../../assets/firebase";
 
 const CommunitySectionBlock = styled.div`
   width: 100%;
@@ -14,8 +19,10 @@ const CommunitySectionBlock = styled.div`
       margin-top: 60px;
       margin-bottom: 60px;
       .board__wrapper__category {
+        position: relative;
         text-align: left;
         ul {
+          margin-bottom: 0;
           li {
             display: inline-block;
             padding: 10px 0px 10px 10px;
@@ -33,6 +40,15 @@ const CommunitySectionBlock = styled.div`
             }
           }
         }
+        button {
+          position: absolute;
+          top: 7px;
+          right: 32px;
+          padding: 6px;
+          background: #669933;
+          color: #fff;
+          font-size: 12px;
+        }
       }
       .board__wrapper__list {
         border-top: 2px solid #333;
@@ -42,6 +58,7 @@ const CommunitySectionBlock = styled.div`
           display: table;
           border-bottom: 1px solid #e5e5e5;
           text-align: center;
+          margin: 0;
           li {
             height: 75px;
             color: #333;
@@ -64,6 +81,38 @@ const CommunitySectionBlock = styled.div`
               width: 15%;
               text-align: center;
             }
+            &.Hit {
+              width: 10%;
+              text-align: center;
+            }
+          }
+        }
+        .list__body {
+          width: 100%;
+          display: table;
+          border-bottom: 1px solid #e5e5e5;
+          text-align: center;
+          margin: 0;
+          padding: 15px 0;
+          li {
+            display: table-cell;
+            &.body__count {
+              width: 10%;
+            }
+            &.body__subject {
+              padding: 0 20px;
+              text-align: left;
+              cursor: pointer;
+            }
+            &.body__name {
+              width: 15%;
+            }
+            &.body__date {
+              width: 15%;
+            }
+            &.body__hit {
+              width: 10%;
+            }
           }
         }
       }
@@ -72,8 +121,36 @@ const CommunitySectionBlock = styled.div`
 `;
 
 const CommunitySection = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [currentCategory, setCurrentCategory] = useState("All");
   const categoryArr = ["All", "news", "interview", "notice"];
+
+  const list = useSelector((state) => state.communitys.currentList);
+  const admin = useSelector((state) => state.members.admin);
+
+  const changeCategory = (val) => {
+    dispatch(changeType(val));
+    setCurrentCategory(val);
+  };
+
+  const goToDetail = (val) => {
+    navigate(`/communityDetail/${val.subject}`, {
+      state: { val: val },
+    });
+    communityDB.child(val.key).update({
+      hit: val.hit + 1,
+    });
+  };
+
+  useEffect(() => {
+    dispatch(fetchCommunity());
+  }, []);
+
+  useEffect(() => {
+    dispatch(changeType(currentCategory));
+  }, [currentCategory]);
 
   return (
     <CommunitySectionBlock>
@@ -86,13 +163,20 @@ const CommunitySection = () => {
                   <span>| </span>
                   <div
                     className={currentCategory === val ? "on" : ""}
-                    onClick={() => setCurrentCategory(val)}
+                    onClick={() => changeCategory(val)}
                   >
                     {val}
                   </div>
                 </li>
               ))}
             </ul>
+            {admin ? (
+              <button onClick={() => navigate("/communityWrite")}>
+                글쓰기
+              </button>
+            ) : (
+              ""
+            )}
           </div>
           <div className="board__wrapper__list">
             <ul className="list__header">
@@ -100,7 +184,21 @@ const CommunitySection = () => {
               <li className="subject">SUBJECT</li>
               <li className="name">NAME</li>
               <li className="date">DATE</li>
+              <li className="Hit">Hit</li>
             </ul>
+            {list.map((val, idx) => (
+              <ul className="list__body" key={idx}>
+                <li className="body__count">{list.length - idx}</li>
+                <li className="body__subject" onClick={() => goToDetail(val)}>
+                  {val.title}
+                </li>
+                <li className="body__name">{val.writer}</li>
+                <li className="body__date">
+                  {dayjs(val.date).format("YYYY.MM.DD")}
+                </li>
+                <li className="body__hit">{val.hit}</li>
+              </ul>
+            ))}
           </div>
         </div>
       </div>

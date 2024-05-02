@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { searchCommunity } from "../../store/community";
 
 const SearchBlock = styled.div`
   text-align: center;
@@ -26,17 +28,24 @@ const SearchBlock = styled.div`
 `;
 
 const Search = () => {
+  const dispatch = useDispatch();
   const [text, setText] = useState("");
+
+  const [searchCategory, setSearchCategory] = useState("title");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // onSearch(text, "search")
-    setText("");
+    dispatch(searchCommunity({ searchCategory: searchCategory, text: text }));
   };
+
   return (
     <SearchBlock>
       <form onSubmit={onSubmit}>
-        <select name="search" id="search">
+        <select
+          name="search"
+          id="search"
+          onChange={(e) => setSearchCategory(e.target.value)}
+        >
           <option value="subject">제목</option>
           <option value="content">내용</option>
         </select>
@@ -44,7 +53,7 @@ const Search = () => {
           type="text"
           placeholder="검색어를 입력하세요."
           value={text}
-          //   onChange={onChange}
+          onChange={(e) => setText(e.target.value)}
         />
         <button type="submit">검색하기</button>
       </form>
