@@ -167,7 +167,11 @@ const HeaderBlock = styled.div`
 
           .sub__menu {
             position: absolute;
+<<<<<<< HEAD
+            padding-top: 23px;
+=======
             padding-top: 45px;
+>>>>>>> 81d54935f711afd40b1235aa453613ce3d73fad9
             z-index: 999;
             li {
               display: none;

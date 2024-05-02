@@ -14,11 +14,46 @@ const UlBlock = styled.ul`
     display: flex;
     flex-wrap: wrap;
     list-style:none; 
-    margin-top:50px; 
+    margin:50px 0; 
+
 `
 const ListBlock = styled.li`
-    flex: 0 0 21%;
-    margin: 20px 2%;
+    flex: 0 0 23%;
+    border: 0px solid #000;
+    margin: 10px 1%;
+    // padding:50px 0;
+    @media (max-width:768px){
+        flex: 0 0 48%;
+    }
+    .imgbox {
+        overflow: hidden;
+        border: 0px solid #ddd;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        height:270px;
+        img { transition: all 0.5s; }
+            &:hover {
+                img { transform: scale(1.5); }
+            }
+    }
+    .info { 
+        margin-left: 10px;
+        font-size: 17px;
+        line-height: 13px;
+        p:nth-child(1) {
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        p:nth-child(2) {
+            font-size: 15px;
+            
+        }
+        p:nth-child(3) {
+            font-weight: 600;
+            
+        }
+    }
+    
 `
 
 const LoadingBlock = styled.div`
@@ -43,7 +78,8 @@ const LoadingBlock = styled.div`
 const ProductInsert = styled.div`
     text-align:center;
     margin:50px 0;
-    a { padding:10px 20px; background:#999; }
+    a { padding:10px 20px; background:#999; color:#fff;
+        &:hover { background:#000; } }
 `
 
 const ProductSection = ({title}) => {
@@ -140,24 +176,26 @@ const ProductSection = ({title}) => {
             {
                 products.map((item, index)=>(
                     <ListBlock key={index}>
-                        <div className="photo">
+                        <div className="imgbox">
                             <Link to={`/product/${item.title}`} state={{ item : item }}><img src={item.photo} alt={item.title} /></Link>
                         </div>
                         <div className="info">
-                            <p><a href="#">{item.name}</a></p>
-                            <p>{parseInt(item.price).toLocaleString()}</p>
-                            { item.inventory!=cartIdCount(item.id) ? <button onClick={ ()=>addToCart(item.id) }><BsCartPlusFill /></button> : <button><BsCartPlus /></button> }
-                            { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }개 남았습니다.</span> : <span>품절!!</span>}
+                            <div>
+                                <p><a href="#">{item.name}</a></p>
+                                <p>{parseInt(item.price).toLocaleString()}원</p>
+                                { item.inventory!=cartIdCount(item.id) ? <button onClick={ ()=>addToCart(item.id) }><BsCartPlusFill /></button> : <button><BsCartPlus /></button> }
+                                { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }개 남았습니다.</span> : <span>품절!!</span>}
+                            </div>
                         </div>
                     </ListBlock>
                 ))
             }
             </UlBlock>
-            {/* { loging && */}
+            { loging && 
                 <ProductInsert>
                     <Link to="/productInsert">상품등록</Link>
                 </ProductInsert>
-            {/* } */}
+            }
         </ProductSectionBlock>
     );
 };

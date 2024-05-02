@@ -5,29 +5,35 @@ import {Link} from 'react-router-dom'
 
 const ProductDetailSectionBlock = styled.div`
 margin: 50px;
-  h2 {
-    text-align: center;
-    font-size: 30px;
-    margin: 20px 0;
-  }
   .content {
     display: flex;
     .photo {
-      width: 300px;
+      width: 600px;
       margin-right: 50px;
+      border-radius: 20px;
     }
     .info {
       flex: 1;
-      button {
-        background: red;
-        color: #fff;
-        padding: 10px 20px;
-        margin: 10px 0;
+      font-size: 18px;
+      h2 {
+        font-size: 30px;
+        margin-bottom: 50px;
+        font-weight: 600;
+      }
+      p:nth-child(2) {
+        color: #f55;
+        font-weight: 600;
+        border-bottom: 1px solid #ddd;
+      }
+      p:nth-child(3) {
+        font-size: 15px;
+        border-bottom: 1px solid #ddd;
       }
       .btn {
-        a { padding:10px 20px; background:red; color:#fff; margin:20px 5px;
-          &:nth-child(2) { background:blue }
-          &:nth-child(3) { background:black }
+        margin-left:-20px;
+        margin-top: 50px;
+        a { padding:10px 20px; background:#bbb; color:#fff; margin:20px 5px; 
+          &:hover { background:#000; }
         }
       }
     }
@@ -44,19 +50,19 @@ const ProductDetailSection = ({product}) => {
 
     return (
         <ProductDetailSectionBlock className="row"> 
-            <h2>{ product.name }</h2>
             <div className="content">
                 <div className="photo">
                     <img src={product.photo} alt={product.name} />
                 </div>
                 <div className="info">
+                    <h2>{ product.name }</h2>
+                    <p>가격 : { parseInt(product.price).toLocaleString()}원</p>
                     <p>이 상품의 아이디는 { product.id }</p>
-                    <p>가격 : { product.price.toLocaleString() }</p>
-                    <p>요약설명 : <span dangerouslySetInnerHTML={{ __html: product.description }} /></p>
+                    <p>상품설명 : <span dangerouslySetInnerHTML={{ __html: product.description }} /></p>
                     <div className="btn">
-                      <a href="#">장바구니</a>
-                      <Link to="">구매하기</Link>
-                      <Link to="/productModify" state={{ product  }}>상품수정</Link>
+                      <Link to="#">구매하기</Link>
+                      <Link to="/product">목록가기</Link>
+                      { loging &&  <Link to="#">상품수정</Link> }
                     </div>
                 </div>
             </div>
