@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faN, faPlay, faV } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleXmark,
+  faN,
+  faPlay,
+  faV,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookF,
   faInstagram,
@@ -10,10 +15,100 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMembers, userLogout } from "../../store/member";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { changeCurrentArtist } from "../../store/artist";
 
 const HeaderBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
+  .modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    .modal-dialog {
+      max-width: 100%;
+      height: 100%;
+      margin: 0;
+      .modal-content {
+        position: relative;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        .modal-header {
+          text-align: center;
+          margin: 50px auto 0;
+          border-bottom: none;
+          color: #fff;
+        }
+        .modal-body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 100px;
+          .modal__data {
+            li {
+              width: 188px;
+              height: 256px;
+              display: inline-block;
+              margin-right: 20px;
+              margin-bottom: 24px;
+              a {
+                position: relative;
+                transition: all 0.5s;
+                &:hover {
+                  opacity: 0.6;
+                  .modal__data__name {
+                    display: block;
+                  }
+                }
+                .modal__data__name {
+                  color: #fff;
+                  position: absolute;
+                  bottom: 2%;
+                  left: 50%;
+                  transform: translate(-50%, 0);
+                  font-size: 12px;
+                  vertical-align: bottom;
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+        .modal-footer {
+          border-top: none;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 50px;
+          a {
+            display: inline-block;
+            height: 40px;
+            border: 1px solid #fff;
+            border-radius: 20px;
+            color: #fff;
+            width: 180px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: center;
+            transition: all 0.5s;
+            &:hover {
+              color: #000;
+              background: #fff;
+            }
+          }
+        }
+        .xIcon {
+          position: absolute;
+          top: 5%;
+          right: 3%;
+          color: #fff;
+          font-size: 40px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
   .header__left {
     flex: 1 1 50%;
     position: relative;
@@ -25,6 +120,7 @@ const HeaderBlock = styled.div`
       position: absolute;
       top: 0;
       left: 70%;
+      cursor: pointer;
     }
   }
   .header__right {
@@ -37,7 +133,7 @@ const HeaderBlock = styled.div`
       }
     }
     .sns {
-      padding: 10px 0;
+      padding: 0;
       a {
         width: 30px;
         height: 30px;
@@ -71,7 +167,7 @@ const HeaderBlock = styled.div`
 
           .sub__menu {
             position: absolute;
-            padding-top: 10px;
+            padding-top: 45px;
             z-index: 999;
             li {
               display: none;
@@ -104,7 +200,20 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [modalOpen, setModalOpen] = useState(false);
   const currentUser = useSelector((state) => state.members.user);
+  const modalData = [
+    { img: "/assets/image/artistMainImg1.jpg", name: "GONG YOO" },
+    { img: "/assets/image/artistMainImg2.jpg", name: "KIM JAE-UCK" },
+    { img: "/assets/image/artistMainImg3.jpg", name: "NAM JOO-HYUK" },
+    { img: "/assets/image/artistMainImg4.jpg", name: "SEO HYUN-JIN" },
+    { img: "/assets/image/artistMainImg5.jpg", name: "SUZY" },
+  ];
+
+  const goToArtist = (name) => {
+    dispatch(changeCurrentArtist(name));
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     dispatch(fetchMembers());
@@ -118,7 +227,7 @@ const Header = () => {
             <img src="/assets/image/logo_black.png" alt="logo" />
           </Link>
         </div>
-        <div className="img__right">
+        <div className="img__right" onClick={() => setModalOpen(true)}>
           <img src="/assets/image/lable.png" alt="lable" />
         </div>
       </div>
@@ -193,6 +302,43 @@ const Header = () => {
           </ul>
         </nav>
       </div>
+      {modalOpen ? (
+        <div className="modal show" style={{ display: "block" }}>
+          <Modal.Dialog>
+            <Modal.Header>
+              <Modal.Title>
+                MANAGEMENT SOOP <h2>OUR ARTIST</h2>
+              </Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+              <ul className="modal__data">
+                {modalData.map((val, idx) => (
+                  <li key={idx} onClick={() => goToArtist(val.name)}>
+                    <Link to="/artist">
+                      <img src={val.img} alt={val.name} />
+                      <div className="modal__data__name">{val.name}</div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Link to="/artist" onClick={() => setModalOpen(false)}>
+                ARTIST PROFILE
+              </Link>
+            </Modal.Footer>
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className="xIcon"
+              onClick={() => setModalOpen(false)}
+            />
+          </Modal.Dialog>
+        </div>
+      ) : (
+        ""
+      )}
     </HeaderBlock>
   );
 };

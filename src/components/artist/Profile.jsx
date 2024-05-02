@@ -248,12 +248,12 @@ const Profile = ({ currentArtistData, lang, setLang, screen, setScreen }) => {
     <ProfileBlock>
       <div className="profile__img">
         <div className="profile__img__img">
-          <img src={currentArtistData.mainPhoto} alt="" />
+          <img src={currentArtistData?.mainPhoto} alt="" />
         </div>
         <div className="profile__img__sns">
           <ul>
-            {Object.keys(currentArtistData.sns).length
-              ? currentArtistData.sns.map((val, idx) => (
+            {Object.keys(currentArtistData?.sns).length
+              ? currentArtistData?.sns.map((val, idx) => (
                   <li key={idx}>
                     <a href={Object.values(val)} target="_blank">
                       {snsBtn(val)}
