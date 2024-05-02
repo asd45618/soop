@@ -188,6 +188,7 @@ const HeaderBlock = styled.div`
           height: 0px;
           z-index: 1;
           background: rgba(255, 255, 255, 0.3);
+          transition: all 0.5s;
         }
       }
       &:hover #blind {
