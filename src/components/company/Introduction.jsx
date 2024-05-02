@@ -23,7 +23,8 @@ const IntroductionBlock =styled.div`
             left: 50%; 
             width: 1px; 
             background-color: #ccc; 
-            content: ""; 
+            content: "";
+            padding: 0;
         }
         .left{
             flex:1;

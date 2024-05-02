@@ -68,13 +68,6 @@ const LoadingBlock = styled.div`
         100% { transform : rotate(3turn) }
     }
 `
-
-// const ButtonBlock = styled.div`
-//     button {
-//         margin:50px 5px; padding:5px 10px; 
-//         &.on { background:red; color:#fff }
-//     }
-// `
 const ProductInsert = styled.div`
     text-align:center;
     margin:50px 0;
@@ -85,33 +78,13 @@ const ProductInsert = styled.div`
 const ProductSection = ({title}) => {
     const dispatch = useDispatch();
 
-    // const admin = useSelector(state=>state.members.admin)
+    const admin = useSelector(state=>state.members.admin)
 
     const carts = useSelector(state=>state.products.carts)
     const allData = useSelector(state=>state.products.products)
     const [products, setProducts] = useState(allData)
     
-
-    // const [changeSort, setChangeSort] = useState("")
-
     const [loading, setLoading] = useState(false)
-
-    // const sortFlag = useRef(false)
-
-    // const sortProduct = (keyname)=>{
-    //     if (!sortFlag.current) {
-    //         setProducts( (products)=>{
-    //             let sortProducts = [...products]
-    //             return sortProducts.sort( (a, b)=> a[keyname] < b[keyname] ? -1:1) 
-    //         })
-    //     } else {
-    //         setProducts( (products)=>{
-    //             let sortProducts = [...products]
-    //             return sortProducts.sort( (a, b)=> a[keyname] > b[keyname] ? -1:1) 
-    //         })
-    //     }
-    //     sortFlag.current = !sortFlag.current
-    // }
 
     const cartIdCount = (id) => {
         let item = carts.find(value=>value.id==id)
@@ -155,8 +128,8 @@ const ProductSection = ({title}) => {
     }, [allData, title])
 
     useEffect(()=>{
-        setLoging()
-    }, [])
+        setLoging(admin)
+    }, [admin])
 
     if (!loading) {
         return (
@@ -191,11 +164,11 @@ const ProductSection = ({title}) => {
                 ))
             }
             </UlBlock>
-            { loging && 
-                <ProductInsert>
+            
+                { loging && <ProductInsert>
                     <Link to="/productInsert">상품등록</Link>
-                </ProductInsert>
-            }
+                </ProductInsert>}
+            
         </ProductSectionBlock>
     );
 };
