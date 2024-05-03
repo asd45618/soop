@@ -79,32 +79,6 @@ const ProductDetailSection = ({ product }) => {
     setLoging(admin);
   }, [admin]);
 
-<<<<<<< HEAD
-    return (
-        <ProductDetailSectionBlock className="row"> 
-            <div className="content">
-                <div className="photo">
-                    <img src={product.photo} alt={product.name} />
-                </div>
-                <div className="info">
-                    <h2>{ product.name } { product.id }</h2>
-                    <p>가격 : { parseInt(product.price).toLocaleString()}원</p>
-                    <p>이 상품의 아이디는 { product.id }</p>
-                    <p>구매수량 : <input type="number" value={qty} onChange={ handleChange } /></p>
-                    <p>상품설명 : <span dangerouslySetInnerHTML={{ __html: product.description }} /></p>
-              
-                    <div className="btn">
-                    <Link to="/cart">바로구매</Link>
-                      <Link to="/product">목록가기</Link>
-                      { loging &&  
-                      <Link to="/productModify" state={{ product }}>상품수정</Link>
-                       }
-                    </div>
-                </div>
-            </div>
-        </ProductDetailSectionBlock>
-    );
-=======
   return (
     <ProductDetailSectionBlock className="row">
       <div className="content">
@@ -129,17 +103,16 @@ const ProductDetailSection = ({ product }) => {
           <div className="btn">
             <Link to="/cart">바로구매</Link>
             <Link to="/product">목록가기</Link>
-            {/* { loging &&   */}
-            <Link to="/productModify" state={{ product }}>
-              상품수정
-            </Link>
-            {/* } */}
+            {loging && (
+              <Link to="/productModify" state={{ product }}>
+                상품수정
+              </Link>
+            )}
           </div>
         </div>
       </div>
     </ProductDetailSectionBlock>
   );
->>>>>>> f63f1d54ecca3fa9f58d742442760b2c2eb38de2
 };
 
 export default ProductDetailSection;
