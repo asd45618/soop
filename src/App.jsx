@@ -12,6 +12,7 @@ import CommunityView from "./views/CommunityView";
 import CommunityWriteView from "./views/CommunityWriteView";
 import LoginView from "./views/LoginView";
 import JoinView from "./views/JoinView";
+import CartView from '@/views/CartView'
 import CommunityDetailView from "./views/CommunityDetailView";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CommunityModifyView from "./views/CommunityModifyView";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/communityWrite" element={<CommunityWriteView />} />
         <Route path="/login" element={<LoginView />} />
         <Route path="/join" element={<JoinView />} />
+        <Route path="/cart" element={ <CartView />} />
         <Route
           path="/communityDetail/:subject"
           element={<CommunityDetailView />}

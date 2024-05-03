@@ -13,8 +13,10 @@ const ProductInsertSectionBlock = styled.div`
         select { height:30px; }
         textarea { height:200px; padding:5px }
         &.btn {
-            justify-content:center; margin-top:20px; 
-            button { padding:10px 20px; background:red  }
+            justify-content:center; margin-top:20px; border: none;
+            button { padding:10px 20px; background:#bbb; color:#fff;
+                &:hover{ background:#000;}
+            }
         }
     }
 `

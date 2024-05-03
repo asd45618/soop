@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProductModifyBlock = styled.div`
   max-width: 500px;
-  margin: 0 auto;
+  margin: 50px auto;
   div {
     display: flex;
     padding: 5px;
@@ -38,9 +38,14 @@ const ProductModifyBlock = styled.div`
     &.btn {
       justify-content: center;
       margin-top: 20px;
+      border: none;
       button {
         padding: 10px 20px;
-        background: red;
+        background: #bbb;
+        color: #fff;
+        &:hover {
+          background: #000;
+        }
       }
     }
   }
