@@ -16,7 +16,7 @@ const memberSlice = createSlice({
       state.user = action.payload;
       // localStorage.setItem('loging', JSON.stringify(action.payload))
       localStorage.loging = JSON.stringify(action.payload);
-      if (action.payload.email === "123@naver.com") {
+      if (action.payload.email ==="123@naver.com") {
         localStorage.admin = JSON.stringify(true);
         state.admin = true;
       } else {
