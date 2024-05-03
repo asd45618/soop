@@ -31,6 +31,13 @@ const RankingSectionBlock = styled.div`
       }
     }
   }
+  .btn {
+    button {
+      padding: 10px;
+      background: #669933;
+      color: #fff;
+    }
+  }
 `;
 
 const RankingSection = () => {
@@ -140,7 +147,7 @@ const RankingSection = () => {
             style={{ width: "100%" }}
             key={idx}
             onClick={() => changeActor(val)}
-            className={actor === val.ename ? "on" : ""}
+            className={dbActor === val.dbName ? "on" : ""}
           >
             <Card.Body>
               <Card.Text>
@@ -173,7 +180,7 @@ const RankingSection = () => {
             </div>
           </Card>
         ))}
-      <div>
+      <div className="btn">
         <button onClick={vote}>투표하기</button>
       </div>
     </RankingSectionBlock>
