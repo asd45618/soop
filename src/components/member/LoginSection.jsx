@@ -16,6 +16,7 @@ const LoginSectionBlock = styled.div`
     .btn {
       display: flex;
       justify-content: right;
+      border: none;
     }
   }
 `;
@@ -50,7 +51,7 @@ const LoginSection = () => {
         pwRef.current.focus();
         return false;
       } else {
-        dispatch(userLogin(findUser));
+        dispatch(userLogin(findUser))
         navigate("/");
       }
     } else {
