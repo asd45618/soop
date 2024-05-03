@@ -87,9 +87,9 @@ const ProductDetailSection = ({product}) => {
                     <div className="btn">
                     <Link to="/cart">바로구매</Link>
                       <Link to="/product">목록가기</Link>
-                      {/* { loging &&   */}
+                      { loging &&  
                       <Link to="/productModify" state={{ product }}>상품수정</Link>
-                       {/* } */}
+                       }
                     </div>
                 </div>
             </div>

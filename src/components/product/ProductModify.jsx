@@ -52,7 +52,7 @@ const ProductModify = ({item}) => {
         e.preventDefault()
         console.log(product)
         try {
-            if (product.photo) {
+            if (product.photo && product.photo.name) {
                 const storageRef = oStorage.ref();
                 const fileRef = storageRef.child(product.photo.name);
                 await fileRef.put(product.photo);

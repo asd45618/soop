@@ -17,6 +17,7 @@ const JoinSectionBlock = styled.div`
     .btn {
       display: flex;
       justify-content: right;
+      border: none;
     }
   }
 `;
