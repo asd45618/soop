@@ -18,5 +18,6 @@ export const productDB = oDB.ref("products");
 export const cartDB = oDB.ref("carts");
 export const communityDB = oDB.ref("communitys");
 export const memberDB = oDB.ref("members");
+export const rankingDB = oDB.ref("rankings");
 
 export const oStorage = firebaseConfig.storage();

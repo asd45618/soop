@@ -289,6 +289,9 @@ const Header = () => {
         <nav className="menu">
           <ul className="menu__group">
             <li>
+              <NavLink to="/ranking">RANKING</NavLink>
+            </li>
+            <li>
               <NavLink to="/company">COMPANY</NavLink>
               <ul className="sub__menu">
                 <li>
