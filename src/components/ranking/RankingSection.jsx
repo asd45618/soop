@@ -92,6 +92,7 @@ const RankingSection = () => {
       await rankingDB.child(dbActor).update({ vote: newVoteNum });
       await rankingDB.child("allVote").update({ allVote: newAllVote });
       alert(`${actor}에게 투표가 완료되었습니다.`);
+      setDbActor("");
     } catch (error) {
       console.log("오류 : ", error);
     }
