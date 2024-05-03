@@ -205,12 +205,12 @@ const ItemCount = styled.div`
   right: 35px;
   font-size: 25px;
   color: #669933;
-`
+`;
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const carts = useSelector(state=>state.products.carts)
+  const carts = useSelector((state) => state.products.carts);
 
   const [modalOpen, setModalOpen] = useState(false);
   const currentUser = useSelector((state) => state.members.user);
@@ -255,10 +255,10 @@ const Header = () => {
             </>
           )}
           <ItemCount>
-              <Link to="/cart">
+            <Link to="/cart">
               <BsCartPlusFill />
-              </Link>
-            </ItemCount>
+            </Link>
+          </ItemCount>
         </div>
         <div className="sns">
           <a href="https://www.facebook.com/soopent" target="_blank">
@@ -288,6 +288,9 @@ const Header = () => {
         </div>
         <nav className="menu">
           <ul className="menu__group">
+            <li>
+              <NavLink to="/game">GAME</NavLink>
+            </li>
             <li>
               <NavLink to="/ranking">RANKING</NavLink>
             </li>
