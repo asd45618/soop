@@ -4,7 +4,7 @@ import { productDB, oStorage } from '@/assets/firebase'
 import { useNavigate } from 'react-router-dom'
 
 const ProductModifyBlock = styled.div`
-max-width:500px; margin:0 auto;
+max-width:500px; margin:50px auto;
 div {
     display:flex; padding:5px; margin:5px; 
     label { width:100px; display:inline-block; }
@@ -14,8 +14,10 @@ div {
     select { height:30px; }
     textarea { height:200px; padding:5px }
     &.btn {
-        justify-content:center; margin-top:20px; 
-        button { padding:10px 20px; background:red  }
+        justify-content:center; margin-top:20px; border: none;
+        button { padding:10px 20px; background:#bbb; color:#fff;
+        &:hover{ background:#000;}
+         }
     }
 }
 `

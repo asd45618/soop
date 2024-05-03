@@ -7,15 +7,6 @@ const IntroductionBlock = styled.div`
   position: relative;
   dispaly: flex;
   justify-content: center;
-  .box {
-    width: 100%;
-    padding: 50px 0;
-    display: flex;
-    margin-bottom: 70px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-<<<<<<< HEAD
     .box {
         width:100%;
         padding: 50px 0;
@@ -57,17 +48,6 @@ const IntroductionBlock = styled.div`
             color: #666;
             letter-spacing: -0.03em;
         }
-=======
-    .divider {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      background-color: #ccc;
-      content: "";
-      padding: 0;
->>>>>>> 816e6b9b3998edab1d7cef20796b7128ee41377c
     }
     .left {
       flex: 1;

@@ -40,17 +40,13 @@ const ListBlock = styled.li`
         margin-left: 10px;
         font-size: 17px;
         line-height: 13px;
+        padding-bottom: 10px;
         p:nth-child(1) {
             margin-top: 20px;
             font-weight: 600;
         }
         p:nth-child(2) {
             font-size: 15px;
-            
-        }
-        p:nth-child(3) {
-            font-weight: 600;
-            
         }
     }
     
