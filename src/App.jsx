@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import HomeView from "./views/HomeView";
 import CompanyView from "./views/CompanyView";
+import HistoryView from "./views/HistoryView";
 import ContactUsView from "./views/ContactUsView";
 import ArtistView from "./views/ArtistView";
 import ProductView from "./views/ProductView";
@@ -26,6 +27,7 @@ function App() {
         <Route index element={<HomeView />} />
         <Route path="/ranking" element={<RankingView />} />
         <Route path="/company" element={<CompanyView />} />
+        <Route path="/history" element={<HistoryView />} />
         <Route path="/contactUs" element={<ContactUsView />} />
         <Route path="/artist" element={<ArtistView />} />
         <Route path="/product" element={<ProductView />} />
