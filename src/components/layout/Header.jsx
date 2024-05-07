@@ -27,7 +27,6 @@ const HeaderBlock = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-
     .modal-dialog {
       max-width: 100%;
       height: 100%;
@@ -38,7 +37,7 @@ const HeaderBlock = styled.div`
         background: rgba(0, 0, 0, 0.9);
         .modal-header {
           text-align: center;
-          margin: 50px auto 0;
+          margin: 150px auto 0;
           border-bottom: none;
           color: #fff;
         }
@@ -46,7 +45,7 @@ const HeaderBlock = styled.div`
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-bottom: 100px;
+       
           .modal__data {
             li {
               width: 188px;
@@ -83,6 +82,7 @@ const HeaderBlock = styled.div`
           justify-content: center;
           margin-bottom: 50px;
           a {
+            margin-bottom: 150px;
             display: inline-block;
             height: 40px;
             border: 1px solid #fff;
@@ -318,7 +318,7 @@ const Header = () => {
               <NavLink to="/community">COMMUNITY</NavLink>
               <ul className="sub__menu">
                 <li>
-                  <NavLink to="">NEWS&amp;NOTICE</NavLink>
+                  <NavLink to="/community">NEWS&amp;NOTICE</NavLink>
                 </li>
               </ul>
             </li>
