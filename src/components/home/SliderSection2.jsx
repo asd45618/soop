@@ -5,9 +5,8 @@ import 'slick-carousel/slick/slick.css';
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io';
 
 const SliderSection2Block = styled.div`
-    margin:50px auto;
+    margin:100px auto;
     position:relative; 
-    padding:0 50px;
     .slick-arrow {
       position:absolute;
       top:48%;
