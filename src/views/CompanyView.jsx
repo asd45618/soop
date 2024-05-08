@@ -1,19 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import Title from '@/components/layout/Title'
-import Introduction from '@/components/company/Introduction';
-
-const CompanyViewBlock = styled.div`
-
-`
-
+import React from "react";
+import Title from "@/components/layout/Title";
+import Introduction from "@/components/company/Introduction";
 
 const CompanyView = () => {
   return (
-    <CompanyViewBlock>
-      <Title title="INTRODUCTION"/>
+    <div>
+      <Title title="INTRODUCTION" />
       <Introduction />
-    </CompanyViewBlock>
+    </div>
   );
 };
 
