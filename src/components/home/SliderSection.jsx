@@ -85,6 +85,18 @@ const SliderSection = () => {
 
   return (
     <SliderSectionblock>
+      { mobile ||
+      <Slider {...options}>
+        {artistSlider.map((val, idx) => (
+          <div className="slide" key={idx}>
+            <img
+              src={val.img}
+              alt={val.name}
+              onClick={() => goToArtist(val.name)}
+            />
+          </div>
+        ))}
+      </Slider> }
       { mobile &&
       <Slider {...options}>
         {artistSlider.map((val, idx) => (
