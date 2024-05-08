@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useDispatch } from "react-redux";
 import { changeCurrentArtist } from "../../store/artist";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive'
 
 const SliderSectionblock = styled.div`
   position: relative;
@@ -20,6 +21,9 @@ const SliderSectionblock = styled.div`
         width: 89%;
         float: right;
         cursor: pointer;
+        @media (max-width: 768px) {
+          width: 100%;
+        }
       }
     }
   }
@@ -49,6 +53,7 @@ const SliderSectionblock = styled.div`
 `;
 
 const SliderSection = () => {
+  const mobile = useMediaQuery({ maxWidth:768 })
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,6 +85,7 @@ const SliderSection = () => {
 
   return (
     <SliderSectionblock>
+      { mobile &&
       <Slider {...options}>
         {artistSlider.map((val, idx) => (
           <div className="slide" key={idx}>
@@ -90,7 +96,7 @@ const SliderSection = () => {
             />
           </div>
         ))}
-      </Slider>
+      </Slider> }
       <div className="artistMenu">
         <ul>
           <li className={activeSlideIndex === 0 ? "active" : ""}>GONG YOO</li>

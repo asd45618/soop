@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import cn from 'classnames'
 import styled from "styled-components";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCartPlusFill } from "react-icons/bs";
+import { RiTreeFill, RiTreeLine } from "react-icons/ri";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useMediaQuery } from 'react-responsive'
 import {
   faCircleXmark,
   faN,
@@ -116,22 +119,31 @@ const HeaderBlock = styled.div`
     display: flex;
     padding: 30px 0 0 30px;
     .img__left {
+      @media (max-width: 768px) {
+        width: 80%;
+      }
     }
     .img__right {
       position: absolute;
       top: 0;
-      left: 70%;
+      left: 80%;
       cursor: pointer;
+      @media (max-width: 768px) {
+        left: 85%;
+      }
     }
   }
   .header__right {
-    width: 50%;
+    width: 30%;
     text-align: right;
     padding-right: 30px;
     .login {
       padding: 5px 50px 5px 5px;
       span {
         cursor: pointer;
+      }
+      @media (max-width: 768px) {
+        padding: 45px 0 0 0;
       }
     }
     .sns {
@@ -147,6 +159,9 @@ const HeaderBlock = styled.div`
           background: #669933;
           color: #fff;
         }
+      }
+      @media (max-width: 768px) {
+        display: none;
       }
     }
     .menu {
@@ -199,18 +214,77 @@ const HeaderBlock = styled.div`
     }
   }
 `;
-const ItemCount = styled.div`
+const ItemCart = styled.div`
   position: absolute;
   top: -7px;
   right: 35px;
   font-size: 25px;
   color: #669933;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
+const ItemTree = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 32px;
+  font-size: 28px;
+  color: green;
+`
+
+const MobileNav = styled.nav`
+  position:fixed;
+  left:100%;
+  top:0; 
+  bottom:0; 
+  right:0;
+  background:rgba(0,0,0,0.5);
+  z-index:9999999;
+  overflow:hidden;
+  transition:all 0.5s;
+  &.on { left:0;  }
+  .closeNav { font-size:28px; color:green; position:absolute; 
+    top:20px; right:-50px; z-index:9999;
+    transition:all 0.3s;
+    &.on { right:20px; transition:all 0.5s; }
+  }
+  ul {
+    position:absolute;
+    top:-10px; right:-200px;
+    height:100%; width:200px; 
+    background:#fff;
+    padding-top:100px; 
+    transition:all 0.3s 0s;
+    &.on { right:0; transition:all 0.3s 0.2s; }
+    li {  
+          font-weight:600; display:block; line-height:40px; margin-right:20px;
+          transition: all 0.5s;
+          .sub__menu {
+            position: absolute;
+            padding-top: 33px;
+            z-index: 999;
+            li {
+              display: block;
+              height: 36px;
+              font-size: 15px;
+              font-weight: normal;
+              &:hover {
+                color: #fff;
+              }
+            }
+          }
+          &:hover, &.active { color: green; } 
+    }
+  }
+`
+
 const Header = () => {
+  const mobile = useMediaQuery({ maxWidth:768 })
+  const [openNav, setOpenNav] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const carts = useSelector((state) => state.products.carts);
+  // const carts = useSelector((state) => state.products.carts);
 
   const [modalOpen, setModalOpen] = useState(false);
   const currentUser = useSelector((state) => state.members.user);
@@ -254,11 +328,16 @@ const Header = () => {
               <span onClick={() => navigate("/join")}>회원가입</span>
             </>
           )}
-          <ItemCount>
+          { mobile &&
+              <ItemTree onClick={()=>setOpenNav(true)}>
+                <RiTreeFill />
+              </ItemTree> 
+            }
+          <ItemCart>
             <Link to="/cart">
               <BsCartPlusFill />
             </Link>
-          </ItemCount>
+          </ItemCart>
         </div>
         <div className="sns">
           <a href="https://www.facebook.com/soopent" target="_blank">
@@ -286,7 +365,8 @@ const Header = () => {
             <FontAwesomeIcon icon={faPlay} />
           </a>
         </div>
-        <nav className="menu">
+        { mobile ||
+          <nav className="menu">
           <ul className="menu__group">
             <li>
               <NavLink to="/game">GAME</NavLink>
@@ -325,6 +405,50 @@ const Header = () => {
             <div id="blind"></div>
           </ul>
         </nav>
+        }
+        { mobile &&
+        <MobileNav className={ openNav && "on"}>
+        <RiTreeLine className={cn("closeNav", openNav && "on")} onClick={()=>setOpenNav(false)} />
+        <ul className={ openNav && "on"}>
+          <li>
+            <NavLink to="/game">GAME</NavLink>
+          </li>
+          <li>
+            <NavLink to="/ranking">RANKING</NavLink>
+          </li>
+          <li>
+            <NavLink to="/company">COMPANY</NavLink>
+            <ul className="sub__menu">
+              <li>
+                <NavLink to="/company">INTRODUCTION</NavLink>
+              </li>
+              <li>
+                <NavLink to="/history">HISTORY</NavLink>
+              </li>
+              <li>
+                <NavLink to="/contactUs">CONTACT US</NavLink>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <NavLink to="/artist">ARTIST</NavLink>
+          </li>
+          <li>
+            <NavLink to="/product">PRODUCT</NavLink>
+          </li>
+          <li>
+            <NavLink to="/community">COMMUNITY</NavLink>
+            <ul className="sub__menu">
+              <li>
+                <NavLink to="/community">NEWS&amp;NOTICE</NavLink>
+              </li>
+            </ul>
+          </li>
+          <div id="blind"></div>
+        </ul>
+      </MobileNav>
+
+        }
       </div>
       {modalOpen ? (
         <div className="modal show" style={{ display: "block" }}>
