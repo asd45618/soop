@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Title from "../components/layout/Title";
 import FindSamePicture from "@/components/findSamePicture/FindSamePicture.jsx";
 import ArtistMenu from "../components/findSamePicture/ArtistMenu";
@@ -16,22 +16,22 @@ const FindSamePictureViewBlock = styled.div`
 const FindSamePictureView = () => {
   const data = {
     yoo: [
-      { img: "/assets/image/yooGame1.webp", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame2.webp", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame3.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame4.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame5.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame6.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame7.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame8.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame1.webp", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame2.webp", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame3.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame4.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame5.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame6.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame7.jpg", eName: "Gong YOO" },
-      { img: "/assets/image/yooGame8.jpg", eName: "Gong YOO" },
+      { img: "/assets/image/yooGame1.webp", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame2.webp", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame3.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame4.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame5.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame6.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame7.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame8.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame1.webp", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame2.webp", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame3.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame4.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame5.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame6.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame7.jpg", eName: "GONG YOO" },
+      { img: "/assets/image/yooGame8.jpg", eName: "GONG YOO" },
     ],
     uck: [
       { img: "/assets/image/uckGame1.jpg" },
@@ -108,14 +108,29 @@ const FindSamePictureView = () => {
   };
 
   const [name, setName] = useState("yoo");
+  const [time, setTime] = useState(0);
+  const intervalRef = useRef(null);
+
+  const counterStart = () => {
+    intervalRef.current = setInterval(() => {
+      setTime((prevTime) => prevTime + 1);
+    }, 1000);
+  };
 
   return (
     <FindSamePictureViewBlock>
       <Title title="같은 그림 찾기" />
       <div className="main">
         <ArtistMenu setName={setName} />
-        <FindSamePicture data={data[name]} />
-        <GameRanking />
+        <FindSamePicture
+          data={data[name]}
+          counterStart={counterStart}
+          intervalRef={intervalRef}
+          time={time}
+          setTime={setTime}
+          name={name}
+        />
+        <GameRanking time={time} name={name} />
       </div>
     </FindSamePictureViewBlock>
   );

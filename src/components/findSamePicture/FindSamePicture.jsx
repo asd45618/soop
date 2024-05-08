@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { gameDB } from "../../assets/firebase";
+import { useSelector } from "react-redux";
 
 const FindSamePictureBlock = styled.div`
   position: relative;
@@ -30,12 +32,21 @@ const FindSamePictureBlock = styled.div`
   }
 `;
 
-const FindSamePicture = ({ data }) => {
+const FindSamePicture = ({
+  data,
+  counterStart,
+  intervalRef,
+  time,
+  setTime,
+  name,
+}) => {
   const [shuffledImages, setShuffledImages] = useState([...data]);
-  const [visibleBtn, steVisibleBtn] = useState(true);
+  const [visibleBtn, setVisibleBtn] = useState(true);
   const [start, setStart] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
+
+  const userName = useSelector((state) => state.members.user);
 
   const startBtn = () => {
     setShuffledImages([]);
@@ -44,8 +55,12 @@ const FindSamePicture = ({ data }) => {
     const shuffled = [...data].sort(() => Math.random() - 0.5);
     setShuffledImages(shuffled);
     setStart(true);
-    steVisibleBtn(false);
-    setTimeout(() => setStart(false), 3000);
+    setVisibleBtn(false);
+    setTime(0);
+    setTimeout(() => {
+      setStart(false);
+      counterStart();
+    }, 3000);
   };
 
   const handleClick = (idx) => {
@@ -76,9 +91,15 @@ const FindSamePicture = ({ data }) => {
   useEffect(() => {
     if (matchedIndexes.length === data.length) {
       // 모든 사진을 다 맞췄을 때
-      steVisibleBtn(true);
+      setVisibleBtn(true);
+      clearInterval(intervalRef.current);
+      gameDB.push({
+        userName: userName.name,
+        newRank: time,
+        artistName: name,
+      });
     }
-  }, [matchedIndexes, data]);
+  }, [matchedIndexes]);
 
   return (
     <FindSamePictureBlock className="row">
