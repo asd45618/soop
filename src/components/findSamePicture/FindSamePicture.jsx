@@ -49,18 +49,22 @@ const FindSamePicture = ({
   const userName = useSelector((state) => state.members.user);
 
   const startBtn = () => {
-    setShuffledImages([]);
-    setClickedIndexes([]);
-    setMatchedIndexes([]);
-    const shuffled = [...data].sort(() => Math.random() - 0.5);
-    setShuffledImages(shuffled);
-    setStart(true);
-    setVisibleBtn(false);
-    setTime(0);
-    setTimeout(() => {
-      setStart(false);
-      counterStart();
-    }, 3000);
+    if (userName) {
+      setShuffledImages([]);
+      setClickedIndexes([]);
+      setMatchedIndexes([]);
+      const shuffled = [...data].sort(() => Math.random() - 0.5);
+      setShuffledImages(shuffled);
+      setStart(true);
+      setVisibleBtn(false);
+      setTime(0);
+      setTimeout(() => {
+        setStart(false);
+        counterStart();
+      }, 3000);
+    } else {
+      alert("로그인을 해주세요.");
+    }
   };
 
   const handleClick = (idx) => {
