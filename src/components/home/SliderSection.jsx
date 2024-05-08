@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useDispatch } from "react-redux";
 import { changeCurrentArtist } from "../../store/artist";
 import { useNavigate } from "react-router-dom";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from "react-responsive";
 
 const SliderSectionblock = styled.div`
   position: relative;
@@ -53,7 +53,7 @@ const SliderSectionblock = styled.div`
 `;
 
 const SliderSection = () => {
-  const mobile = useMediaQuery({ maxWidth:768 })
+  const mobile = useMediaQuery({ maxWidth: 768 });
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -85,18 +85,32 @@ const SliderSection = () => {
 
   return (
     <SliderSectionblock>
-      { mobile &&
-      <Slider {...options}>
-        {artistSlider.map((val, idx) => (
-          <div className="slide" key={idx}>
-            <img
-              src={val.img}
-              alt={val.name}
-              onClick={() => goToArtist(val.name)}
-            />
-          </div>
-        ))}
-      </Slider> }
+      {mobile || (
+        <Slider {...options}>
+          {artistSlider.map((val, idx) => (
+            <div className="slide" key={idx}>
+              <img
+                src={val.img}
+                alt={val.name}
+                onClick={() => goToArtist(val.name)}
+              />
+            </div>
+          ))}
+        </Slider>
+      )}
+      {mobile && (
+        <Slider {...options}>
+          {artistSlider.map((val, idx) => (
+            <div className="slide" key={idx}>
+              <img
+                src={val.img}
+                alt={val.name}
+                onClick={() => goToArtist(val.name)}
+              />
+            </div>
+          ))}
+        </Slider>
+      )}
       <div className="artistMenu">
         <ul>
           <li className={activeSlideIndex === 0 ? "active" : ""}>GONG YOO</li>
