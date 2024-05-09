@@ -28,7 +28,7 @@ const HistoryBlock = styled.div`
     }
 }
 
-  .tt {
+  .award {
     margin: 50px;
     display: flex;
     overflow-x: auto;
@@ -58,22 +58,22 @@ const HistoryBlock = styled.div`
 
 const History = () => {
     const dotRef = useRef(null);
-    const ttRef = useRef(null);
+    const awardRef = useRef(null);
   
     useEffect(() => {
         const handleScroll = () => {
-        const ttWidth = ttRef.current.offsetWidth;
-        const ttScrollWidth = ttRef.current.scrollWidth;
-        const ttScrollLeft = ttRef.current.scrollLeft;
-        const roadWidth = ttWidth - 100; // road의 시작과 끝에서 각각 50px씩 여백을 둠
+        const awardWidth = awardRef.current.offsetWidth;
+        const awardScrollWidth = awardRef.current.scrollWidth;
+        const awardScrollLeft = awardRef.current.scrollLeft;
+        const roadWidth = awardWidth - 100; // road의 시작과 끝에서 각각 50px씩 여백을 둠
       
         // dot 요소의 left 위치 계산
         let dotLeft;
-        if (ttScrollWidth - ttScrollLeft <= ttWidth) {
+        if (awardScrollWidth - awardScrollLeft <= awardWidth) {
               // 스크롤이 맨 오른쪽에 도달한 경우
             dotLeft = roadWidth;
         } else {
-            dotLeft = (ttScrollLeft / (ttScrollWidth - ttWidth)) * roadWidth;
+            dotLeft = (awardScrollLeft / (awardScrollWidth - awardWidth)) * roadWidth;
         }
       
         // dot 요소 위치 설정
@@ -82,13 +82,13 @@ const History = () => {
             }
         };
       
-        if (ttRef.current) {
-            ttRef.current.addEventListener('scroll', handleScroll);
+        if (awardRef.current) {
+            awardRef.current.addEventListener('scroll', handleScroll);
         }
       
         return () => {
-        if (ttRef.current) {
-            ttRef.current.removeEventListener('scroll', handleScroll);
+        if (awardRef.current) {
+            awardRef.current.removeEventListener('scroll', handleScroll);
             }
           };
         }, []);
@@ -101,7 +101,7 @@ const History = () => {
               <span className="road"></span>
               <span ref={dotRef} className="dot"></span>
           </div>
-                <div ref={ttRef} className="tt">
+                <div ref={awardRef} className="award">
                        <h2>2023</h2>
                        <div className="content">
                         <ul>
