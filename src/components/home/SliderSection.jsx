@@ -85,6 +85,32 @@ const SliderSection = () => {
 
   return (
     <SliderSectionblock>
+<<<<<<< HEAD
+      { mobile ||
+      <Slider {...options}>
+        {artistSlider.map((val, idx) => (
+          <div className="slide" key={idx}>
+            <img
+              src={val.img}
+              alt={val.name}
+              onClick={() => goToArtist(val.name)}
+            />
+          </div>
+        ))}
+      </Slider> }
+      { mobile &&
+      <Slider {...options}>
+        {artistSlider.map((val, idx) => (
+          <div className="slide" key={idx}>
+            <img
+              src={val.img}
+              alt={val.name}
+              onClick={() => goToArtist(val.name)}
+            />
+          </div>
+        ))}
+      </Slider> }
+=======
       {mobile || (
         <Slider {...options}>
           {artistSlider.map((val, idx) => (
@@ -111,6 +137,7 @@ const SliderSection = () => {
           ))}
         </Slider>
       )}
+>>>>>>> 4bfe80c1258507ffae5be1cc44066a86ecea9073
       <div className="artistMenu">
         <ul>
           <li className={activeSlideIndex === 0 ? "active" : ""}>GONG YOO</li>
