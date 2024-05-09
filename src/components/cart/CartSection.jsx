@@ -91,7 +91,6 @@ const CartSection = () => {
         .child(id)
         .update({ qty: newQty })
         .then(() => {
-          console.log("수량이 업데이트되었습니다.");
           dispatch(fetchProducts());
           dispatch(fetchCarts());
         })
@@ -140,7 +139,6 @@ const CartSection = () => {
           const product = products.find((product) => product.id == item.key);
           return { product: product, qty: item.qty };
         });
-        console.log(newData);
         setTotal(
           newData.reduce(
             (acc, item) =>

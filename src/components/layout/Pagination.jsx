@@ -72,7 +72,7 @@ const Pagination = ({ currentPage, totalItems, itemsPerPage, onClick }) => {
               onClick={() => goToPage(page)}
               key={page}
               type="button"
-              className={currentPage == page && "on"}
+              className={currentPage == page ? "on" : ""}
             >
               {page}
             </button>
