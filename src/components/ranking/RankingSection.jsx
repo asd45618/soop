@@ -46,44 +46,6 @@ const RankingSection = () => {
   const [allNum, setAllNum] = useState([]);
   const [voteNum, setVoteNum] = useState(0);
   const [allVote, setAllVote] = useState(0);
-  // const rankingData = [
-  //   {
-  //     img: "/assets/image/artistMainImg1.jpg",
-  //     dbName: "yoo",
-  //     ename: "GONG YOO",
-  //     kname: "공유",
-  //     id: 4,
-  //   },
-  //   {
-  //     img: "/assets/image/artistMainImg2.jpg",
-  //     dbName: "uck",
-  //     ename: "KIM JAE-UCK",
-  //     kname: "김재욱",
-  //     id: 3,
-  //   },
-  //   {
-  //     img: "/assets/image/artistMainImg3.jpg",
-  //     dbName: "hyuk",
-  //     ename: "NAM JOO-HYUK",
-  //     kname: "남주혁",
-  //     id: 0,
-  //   },
-  //   {
-  //     img: "/assets/image/artistMainImg4.jpg",
-  //     dbName: "jin",
-  //     ename: "SEO HYUN-JIN",
-  //     kname: "서현진",
-  //     id: 1,
-  //   },
-  //   {
-  //     img: "/assets/image/artistMainImg5.jpg",
-  //     dbName: "suzy",
-  //     ename: "SUZY",
-  //     kname: "수지",
-  //     id: 2,
-  //   },
-  // ];
-  // let a = 0;
 
   const vote = async () => {
     try {

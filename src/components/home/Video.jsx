@@ -79,10 +79,7 @@ const Video = () => {
           </div>
         </div>
         <div className="video__slide">
-          <VideoSlider
-            // videoData={videoData}
-            setCurrentVid={setCurrentVid}
-          ></VideoSlider>
+          <VideoSlider setCurrentVid={setCurrentVid}></VideoSlider>
         </div>
       </div>
     </VideoBlock>

@@ -17,7 +17,6 @@ const ContactUsBlock = styled.div`
     padding: 50px 0;
     display: flex;
     margin-bottom: 70px;
-    // align-item:center;
     .left {
       flex: 1;
     }
