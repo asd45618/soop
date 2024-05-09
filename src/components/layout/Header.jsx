@@ -133,7 +133,7 @@ const HeaderBlock = styled.div`
     }
   }
   .header__right {
-    width: 30%;
+    width: 40%;
     text-align: right;
     padding-right: 30px;
     .login {
