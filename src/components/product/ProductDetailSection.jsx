@@ -87,7 +87,7 @@ const ProductDetailSection = ({ product }) => {
         </div>
         <div className="info">
           <h2>
-            {product.name} {product.id}
+            {product.name}
           </h2>
           <p>가격 : {parseInt(product.price).toLocaleString()}원</p>
           <p>이 상품의 아이디는 {product.id}</p>

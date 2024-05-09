@@ -277,20 +277,6 @@ const MobileNav = styled.nav`
       line-height: 40px;
       margin-right: 20px;
       transition: all 0.5s;
-      .sub__menu {
-        position: absolute;
-        padding-top: 33px;
-        z-index: 999;
-        li {
-          display: block;
-          height: 36px;
-          font-size: 15px;
-          font-weight: normal;
-          &:hover {
-            color: #fff;
-          }
-        }
-      }
       &:hover,
       &.active {
         color: green;
