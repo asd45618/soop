@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { cartDB, productDB } from "../../assets/firebase";
+import { fetchCarts, fetchProducts } from "../../store/product";
 
 const ProductDetailSectionBlock = styled.div`
   margin: 50px;
@@ -60,6 +62,9 @@ const ProductDetailSectionBlock = styled.div`
 `;
 
 const ProductDetailSection = ({ product }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.members.user);
   const admin = useSelector((state) => state.members.admin);
   const [qty, setQty] = useState(1);
   const [loging, setLoging] = useState(false);
@@ -75,6 +80,52 @@ const ProductDetailSection = ({ product }) => {
     setQty(newQty);
   };
 
+  const buyNow = () => {
+    if (user) {
+      if (confirm("바로 구매하시겠습니까?")) {
+        productDB
+          .child(product.key)
+          .update({
+            inventory: product.inventory - qty,
+          })
+          .then(() => {
+            alert("구매가 완료되었습니다.");
+            navigate("/product");
+          });
+        dispatch(fetchProducts());
+      }
+    } else {
+      alert("로그인해주세요.");
+    }
+  };
+
+  const addCart = async () => {
+    if (user) {
+      if (
+        confirm(`장바구니에 ${product.name}상품을 ${qty}개 추가하시겠습니까?`)
+      ) {
+        try {
+          const cartItemRef = cartDB.child(user.key).child(product.id); // 해당 유저의 레퍼런스 생성
+          const cartItemSnapshot = await cartItemRef.once("value"); // 해당 유저의 스냅샷 가져오기
+          let quantity = 1;
+          if (cartItemSnapshot.exists()) {
+            // 해당 유저가 이미 장바구니에 있는 경우 수량을 증가시킴
+            quantity = cartItemSnapshot.val().qty + qty;
+          } else {
+            quantity = qty;
+          }
+          // 장바구니에 상품 추가 또는 업데이트
+          await cartItemRef.set({ qty: quantity });
+          dispatch(fetchCarts());
+        } catch (error) {
+          console.log("오류메시지:", error);
+        }
+      }
+    } else {
+      alert("로그인해주세요.");
+    }
+  };
+
   useEffect(() => {
     setLoging(admin);
   }, [admin]);
@@ -86,9 +137,7 @@ const ProductDetailSection = ({ product }) => {
           <img src={product.photo} alt={product.name} />
         </div>
         <div className="info">
-          <h2>
-            {product.name}
-          </h2>
+          <h2>{product.name}</h2>
           <p>가격 : {parseInt(product.price).toLocaleString()}원</p>
           <p>이 상품의 아이디는 {product.id}</p>
           <p>
@@ -101,7 +150,8 @@ const ProductDetailSection = ({ product }) => {
           </p>
 
           <div className="btn">
-            <Link to="/cart">바로구매</Link>
+            <a onClick={buyNow}>바로구매</a>
+            <a onClick={addCart}>장바구니 추가</a>
             <Link to="/product">목록가기</Link>
             {loging && (
               <Link to="/productModify" state={{ product }}>
