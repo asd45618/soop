@@ -154,8 +154,8 @@ const ProductSection = () => {
         {products.map((item, index) => (
           <ListBlock key={index}>
             <div className="imgbox">
-              <Link to={`/product/${item.title}`} state={{ item: item }}>
-                <img src={item.photo} alt={item.title} />
+              <Link to={`/product/${item.name}`} state={{ item: item }}>
+                <img src={item.photo} alt={item.name} />
               </Link>
             </div>
             <div className="info">
