@@ -6,6 +6,7 @@ import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchMembers, userLogin } from "../../store/member";
+import { fetchCarts, fetchProducts } from "../../store/product";
 
 const LoginSectionBlock = styled.div`
   .container {
@@ -51,7 +52,9 @@ const LoginSection = () => {
         pwRef.current.focus();
         return false;
       } else {
-        dispatch(userLogin(findUser))
+        dispatch(userLogin({ key: findUser.key, email: email }));
+        dispatch(fetchCarts());
+        dispatch(fetchProducts());
         navigate("/");
       }
     } else {

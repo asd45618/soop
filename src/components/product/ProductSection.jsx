@@ -6,6 +6,7 @@ import { BsCartPlusFill, BsCartPlus } from "react-icons/bs";
 import { PiSpinnerLight } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { cartDB } from "@/assets/firebase";
+import { fetchCarts } from "../../store/product";
 
 const ProductSectionBlock = styled.div``;
 
@@ -88,6 +89,7 @@ const ProductSection = () => {
 
   const admin = useSelector((state) => state.members.admin);
 
+  const user = useSelector((state) => state.members.user);
   const carts = useSelector((state) => state.products.carts);
   const allData = useSelector((state) => state.products.products);
   const [products, setProducts] = useState(allData);
@@ -104,18 +106,25 @@ const ProductSection = () => {
   };
 
   const addToCart = async (id) => {
-    try {
-      const cartItemRef = cartDB.child(id); // 해당 상품의 레퍼런스 생성
-      const cartItemSnapshot = await cartItemRef.once("value"); // 해당 상품의 스냅샷 가져오기
-      let quantity = 1;
-      if (cartItemSnapshot.exists()) {
-        // 해당 상품이 이미 장바구니에 있는 경우 수량을 증가시킴
-        quantity = cartItemSnapshot.val().qty + 1;
+    if (user) {
+      try {
+        const cartItemRef = cartDB.child(user.key).child(id); // 해당 유저의 레퍼런스 생성
+        const cartItemSnapshot = await cartItemRef.once("value"); // 해당 유저의 스냅샷 가져오기
+        let quantity = 1;
+        if (cartItemSnapshot.exists()) {
+          // 해당 유저가 이미 장바구니에 있는 경우 수량을 증가시킴
+          quantity = cartItemSnapshot.val().qty + 1;
+        }
+        // 장바구니에 상품 추가 또는 업데이트
+        await cartItemRef.set({ qty: quantity });
+        dispatch(fetchCarts());
+      } catch (error) {
+        console.log("오류메시지:", error);
       }
-      // 장바구니에 상품 추가 또는 업데이트
-      await cartItemRef.set({ id: id, qty: quantity });
-    } catch (error) {
-      console.log("오류메시지:", error);
+    } else {
+      alert("로그인을 해주세요.");
+      sessionStorage.setItem("previousUrl", "/product");
+      navigate("/login");
     }
   };
 

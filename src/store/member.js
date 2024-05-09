@@ -37,7 +37,9 @@ export const fetchMembers = () => async (dispatch) => {
   try {
     memberDB.on("value", (snapshot) => {
       const membersObj = snapshot.val();
-      const membersArr = Object.values(membersObj);
+      const membersArr = Object.entries(membersObj).map(([key, value]) => {
+        return { key: key, ...value }; // 키와 값 모두 포함한 객체 생성
+      });
       dispatch(initMembers(membersArr));
     });
   } catch (error) {
