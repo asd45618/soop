@@ -54,7 +54,6 @@ export const fetchCarts = () => async (dispatch, getState) => {
             const userCartsArrNotFirst = userCartsArr.filter(
               (item, key) => key !== 0
             );
-            console.log(userCartsArrNotFirst);
             dispatch(initCarts(userCartsArrNotFirst));
           } else {
             dispatch(initCarts([]));

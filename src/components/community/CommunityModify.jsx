@@ -18,12 +18,14 @@ const CommunityModifyBlock = styled.div`
     .btn {
       display: flex;
       justify-content: center;
+      button {
+        margin: 0 10px;
+      }
     }
   }
 `;
 
 const CommunityModify = ({ val }) => {
-  console.log(val);
   const navigate = useNavigate();
 
   const [board, setBoard] = useState({
@@ -81,6 +83,13 @@ const CommunityModify = ({ val }) => {
             <option value="notice">notice</option>
           </Form.Select>
           <div className="btn">
+            <Button
+              variant="success"
+              type="submit"
+              onClick={() => navigate(-1)}
+            >
+              취소
+            </Button>{" "}
             <Button variant="success" type="submit">
               등록
             </Button>{" "}

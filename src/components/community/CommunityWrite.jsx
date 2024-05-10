@@ -19,6 +19,9 @@ const CommunityWriteBlock = styled.div`
     .btn {
       display: flex;
       justify-content: center;
+      button {
+        margin: 0 10px;
+      }
     }
   }
 `;
@@ -83,6 +86,13 @@ const CommunityWrite = () => {
             <option value="notice">notice</option>
           </Form.Select>
           <div className="btn">
+            <Button
+              variant="success"
+              type="button"
+              onClick={() => navigate(-1)}
+            >
+              취소
+            </Button>{" "}
             <Button variant="success" type="submit">
               등록
             </Button>{" "}

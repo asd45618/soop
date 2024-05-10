@@ -37,9 +37,9 @@ const ProductModifyBlock = styled.div`
     }
     &.btn {
       justify-content: center;
-      margin-top: 20px;
       border: none;
       button {
+        margin: 20px 10px 0;
         padding: 10px 20px;
         background: #bbb;
         color: #fff;
@@ -150,6 +150,9 @@ const ProductModify = ({ item }) => {
           />
         </div>
         <div className="btn">
+          <button type="button" onClick={() => navigate(-1)}>
+            취소
+          </button>
           <button type="submit">등록</button>
         </div>
       </form>

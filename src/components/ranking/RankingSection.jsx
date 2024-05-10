@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Card from "react-bootstrap/Card";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { rankingDB } from "../../assets/firebase";
+import { useSelector } from "react-redux";
 
 const RankingSectionBlock = styled.div`
   margin-bottom: 100px;
@@ -47,16 +48,22 @@ const RankingSection = () => {
   const [voteNum, setVoteNum] = useState(0);
   const [allVote, setAllVote] = useState(0);
 
+  const user = useSelector((state) => state.members.user);
+
   const vote = async () => {
-    try {
-      const newVoteNum = voteNum + 1;
-      const newAllVote = allVote + 1;
-      await rankingDB.child(dbActor).update({ vote: newVoteNum });
-      await rankingDB.child("allVote").update({ allVote: newAllVote });
-      alert(`${actor}에게 투표가 완료되었습니다.`);
-      setDbActor("");
-    } catch (error) {
-      console.log("오류 : ", error);
+    if (user) {
+      try {
+        const newVoteNum = voteNum + 1;
+        const newAllVote = allVote + 1;
+        await rankingDB.child(dbActor).update({ vote: newVoteNum });
+        await rankingDB.child("allVote").update({ allVote: newAllVote });
+        alert(`${actor}에게 투표가 완료되었습니다.`);
+        setDbActor("");
+      } catch (error) {
+        console.log("오류 : ", error);
+      }
+    } else {
+      alert("로그인 해주세요.");
     }
   };
 

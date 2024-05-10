@@ -40,7 +40,6 @@ export const fetchMembers = () => async (dispatch) => {
       const membersArr = Object.entries(membersObj).map(([key, value]) => {
         return { key: key, ...value }; // 키와 값 모두 포함한 객체 생성
       });
-      console.log(membersArr);
       dispatch(initMembers(membersArr));
     });
   } catch (error) {
