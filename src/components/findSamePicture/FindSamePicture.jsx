@@ -43,6 +43,7 @@ const FindSamePicture = ({
   const [shuffledImages, setShuffledImages] = useState([...data]);
   const [visibleBtn, setVisibleBtn] = useState(true);
   const [start, setStart] = useState(false);
+  const [imgClick, setImgClick] = useState(false);
   const [clickedIndexes, setClickedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
 
@@ -60,6 +61,7 @@ const FindSamePicture = ({
       setTime(0);
       setTimeout(() => {
         setStart(false);
+        setImgClick(true);
         counterStart();
       }, 3000);
     } else {
@@ -71,7 +73,8 @@ const FindSamePicture = ({
     if (
       clickedIndexes.length < 2 &&
       !clickedIndexes.includes(idx) &&
-      !matchedIndexes.includes(idx)
+      !matchedIndexes.includes(idx) &&
+      imgClick
     )
       setClickedIndexes([...clickedIndexes, idx]);
   };
@@ -96,6 +99,7 @@ const FindSamePicture = ({
     if (matchedIndexes.length === data.length) {
       // 모든 사진을 다 맞췄을 때
       setVisibleBtn(true);
+      setImgClick(false);
       clearInterval(intervalRef.current);
       gameDB.push({
         userName: userName.name,
