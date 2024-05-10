@@ -25,16 +25,13 @@ const ProductDetailSectionBlock = styled.div`
       }
       p:nth-child(2) {
         font-weight: 600;
-        // border-bottom: 1px solid #ddd;
       }
       p:nth-child(3) {
         color: #bbb;
         font-size: 15px;
-        // border-bottom: 1px solid #ddd;
       }
       p:nth-child(4) {
         font-size: 15px;
-        // border-bottom: 1px solid #ddd;
         input {
           width: 50px;
           text-align: center;

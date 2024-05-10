@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchProducts } from "@/store/product";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
