@@ -5,6 +5,7 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import { changeType, fetchCommunity } from "../../store/community";
 import { communityDB } from "../../assets/firebase";
+import Pagination from "../layout/Pagination";
 
 const CommunitySectionBlock = styled.div`
   width: 100%;
@@ -126,6 +127,8 @@ const CommunitySection = () => {
 
   const [currentCategory, setCurrentCategory] = useState("All");
   const categoryArr = ["All", "news", "interview", "notice"];
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   const list = useSelector((state) => state.communitys.currentList);
   const admin = useSelector((state) => state.members.admin);
@@ -142,6 +145,10 @@ const CommunitySection = () => {
     communityDB.child(val.key).update({
       hit: val.hit + 1,
     });
+  };
+
+  const onClick = (page) => {
+    setCurrentPage(page);
   };
 
   useEffect(() => {
@@ -163,7 +170,10 @@ const CommunitySection = () => {
                   <span>| </span>
                   <div
                     className={currentCategory === val ? "on" : ""}
-                    onClick={() => changeCategory(val)}
+                    onClick={() => {
+                      changeCategory(val);
+                      setCurrentPage(1);
+                    }}
                   >
                     {val}
                   </div>
@@ -186,22 +196,35 @@ const CommunitySection = () => {
               <li className="date">DATE</li>
               <li className="Hit">Hit</li>
             </ul>
-            {list.map((val, idx) => (
-              <ul className="list__body" key={idx}>
-                <li className="body__count">{list.length - idx}</li>
-                <li className="body__subject" onClick={() => goToDetail(val)}>
-                  {val.title}
-                </li>
-                <li className="body__name">{val.writer}</li>
-                <li className="body__date">
-                  {dayjs(val.date).format("YYYY.MM.DD")}
-                </li>
-                <li className="body__hit">{val.hit}</li>
-              </ul>
-            ))}
+            {list
+              .slice(
+                itemsPerPage * (currentPage - 1),
+                itemsPerPage * currentPage
+              )
+              .map((val, idx) => (
+                <ul className="list__body" key={idx}>
+                  <li className="body__count">
+                    {list.length - idx - (currentPage - 1) * itemsPerPage}
+                  </li>
+                  <li className="body__subject" onClick={() => goToDetail(val)}>
+                    {val.title}
+                  </li>
+                  <li className="body__name">{val.writer}</li>
+                  <li className="body__date">
+                    {dayjs(val.date).format("YYYY.MM.DD")}
+                  </li>
+                  <li className="body__hit">{val.hit}</li>
+                </ul>
+              ))}
           </div>
         </div>
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalItems={list.length}
+        itemsPerPage={itemsPerPage}
+        onClick={onClick}
+      />
     </CommunitySectionBlock>
   );
 };
