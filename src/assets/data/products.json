@@ -1,7 +1,0 @@
-[
-    { "id":1001, "title":"공유", "price":32000, "rating":5, "description":"공유 포토 노트", "inventory":10, "image":"./assets/image/g1.jpg" },
-    { "id":4002, "title":"김재욱", "price":12000, "rating":4, "description":"김재욱 아코디언 엽서", "inventory":20, "image":"./assets/image/g2.jpg" },
-    { "id":1002, "title":"수지", "price":45000, "rating":4, "description":"수지 OST 미니앨범", "inventory":20, "image":"./assets/image/g3.jpg" },
-    { "id":2001, "title":"서현진", "price":58000, "rating":5, "description":"서현진 티셔츠", "inventory":10, "image":"./assets/image/g4.jpg" }
-
-]
