@@ -65,21 +65,18 @@ const ProductModify = ({ item }) => {
   const [photoValue, setPhotoValue] = useState("");
 
   const handleChange = (e) => {
-    console.log(e);
     const { value, name } = e.target;
     setProduct((product) => ({ ...product, [name]: value }));
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]; // 선택된 파일
-    console.log(file); // 선택파일에 대한 모든 정보(사이즈, 이름 등)
     setProduct((prevProduct) => ({ ...prevProduct, photo: file }));
     setPhotoValue(e.target.value);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(product);
     try {
       if (product.photo && product.photo.name) {
         const storageRef = oStorage.ref();
