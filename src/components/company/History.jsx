@@ -31,8 +31,23 @@ const HistoryBlock = styled.div`
   .award {
     margin: 50px;
     display: flex;
-    overflow-x: auto;
+    overflow-x: scroll;
     position: relative;
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      cursor: pointer;
+      background: rgba(102, 153, 51, 0.6); /* 스크롤바 막대 색상 */
+      border-radius: 12px;
+      &:hover {
+        background-color: rgba(102, 153, 51, 0.4);
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background: rgba(102, 153, 51, 0.2); /* 스크롤바 뒷 배경 색상 */
+      border-radius: 12px;
+    }
     h2 {
       font-size: 30px;
       margin: 0 20px 20px 20px;
