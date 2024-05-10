@@ -52,7 +52,9 @@ const LoginSection = () => {
         pwRef.current.focus();
         return false;
       } else {
-        dispatch(userLogin({ key: findUser.key, email: email }));
+        dispatch(
+          userLogin({ key: findUser.key, email: email, name: findUser.name })
+        );
         dispatch(fetchCarts());
         dispatch(fetchProducts());
         navigate("/");

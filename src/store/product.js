@@ -6,7 +6,6 @@ const productSlice = createSlice({
   initialState: {
     products: [], // { "key":"", "category":"woman", "id":1001, "title":"여성의류1", "price":437500, "rating":5, "description":"여성의류1 요약설명은 <strong>중요</strong>합니다.", "inventory":10, "image":"./assets/image/0010050001972.jpg" },
     carts: [], // { id:id, qty:3}
-    cartsCount: 0,
   },
   reducers: {
     initProducts(state, action) {
@@ -14,7 +13,6 @@ const productSlice = createSlice({
     },
     initCarts(state, action) {
       state.carts = action.payload;
-      state.cartsCount = state.carts.length;
     },
   },
 });
@@ -56,7 +54,10 @@ export const fetchCarts = () => async (dispatch, getState) => {
             const userCartsArrNotFirst = userCartsArr.filter(
               (item, key) => key !== 0
             );
+            console.log(userCartsArrNotFirst);
             dispatch(initCarts(userCartsArrNotFirst));
+          } else {
+            dispatch(initCarts([]));
           }
         } else {
           dispatch(initCarts([]));

@@ -5,6 +5,7 @@ import { fetchProducts } from "@/store/product";
 import { cartDB } from "@/assets/firebase";
 import { fetchCarts } from "../../store/product";
 import { productDB } from "../../assets/firebase";
+import { useNavigate } from "react-router-dom";
 
 const TableBlock = styled.table`
   margin: 50px 0;
@@ -63,6 +64,7 @@ const TableBlock = styled.table`
 
 const CartSection = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
   const carts = useSelector((state) => state.products.carts);
   const user = useSelector((state) => state.members.user);
@@ -127,8 +129,10 @@ const CartSection = () => {
         });
         cartDB.child(user.key).child(val.product.id).remove();
       });
-      dispatch(fetchProducts());
       dispatch(fetchCarts());
+      dispatch(fetchProducts());
+      alert("구매가 완료되었습니다.");
+      navigate("/product");
     }
   };
 
