@@ -7,6 +7,7 @@ import { PiSpinnerLight } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { cartDB } from "@/assets/firebase";
 import { fetchCarts } from "../../store/product";
+import Pagination from "../layout/Pagination";
 
 const ProductSectionBlock = styled.div``;
 
@@ -128,6 +129,12 @@ const ProductSection = () => {
     }
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+  const onClick = (page) => {
+    setCurrentPage(page);
+  };
+
   const [loging, setLoging] = useState(false);
 
   useEffect(() => {
@@ -160,40 +167,49 @@ const ProductSection = () => {
   return (
     <ProductSectionBlock className="row">
       <UlBlock>
-        {products.map((item, index) => (
-          <ListBlock key={index}>
-            <div className="imgbox">
-              <Link to={`/product/${item.name}`} state={{ item: item }}>
-                <img src={item.photo} alt={item.name} />
-              </Link>
-            </div>
-            <div className="info">
-              <div>
-                <p>
-                  <a href="#">{item.name}</a>
-                </p>
-                <p>{parseInt(item.price).toLocaleString()}원</p>
-                {item.inventory != cartIdCount(item.id) ? (
-                  <button onClick={() => addToCart(item.id)}>
-                    <BsCartPlusFill />
-                  </button>
-                ) : (
-                  <button>
-                    <BsCartPlus />
-                  </button>
-                )}
-                {item.inventory != cartIdCount(item.id) ? (
-                  <span>
-                    {item.inventory - cartIdCount(item.id)}개 남았습니다.
-                  </span>
-                ) : (
-                  <span>품절!!</span>
-                )}
+        {products
+          .slice(itemsPerPage * (currentPage - 1), itemsPerPage * currentPage)
+          .map((item, index) => (
+            <ListBlock key={index}>
+              <div className="imgbox">
+                <Link to={`/product/${item.name}`} state={{ item: item }}>
+                  <img src={item.photo} alt={item.name} />
+                </Link>
               </div>
-            </div>
-          </ListBlock>
-        ))}
+              <div className="info">
+                <div>
+                  <p>
+                    <a href="#">{item.name}</a>
+                  </p>
+                  <p>{parseInt(item.price).toLocaleString()}원</p>
+                  {item.inventory != cartIdCount(item.id) ? (
+                    <button onClick={() => addToCart(item.id)}>
+                      <BsCartPlusFill />
+                    </button>
+                  ) : (
+                    <button>
+                      <BsCartPlus />
+                    </button>
+                  )}
+                  {item.inventory != cartIdCount(item.id) ? (
+                    <span>
+                      {item.inventory - cartIdCount(item.id)}개 남았습니다.
+                    </span>
+                  ) : (
+                    <span>품절!!</span>
+                  )}
+                </div>
+              </div>
+            </ListBlock>
+          ))}
       </UlBlock>
+
+      <Pagination
+        currentPage={currentPage}
+        totalItems={products.length}
+        itemsPerPage={itemsPerPage}
+        onClick={onClick}
+      />
 
       {loging && (
         <ProductInsert>
