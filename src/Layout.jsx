@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Header from "./components/layout/Header";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/layout/Footer";
@@ -24,6 +24,10 @@ const Layout = () => {
   const goToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <LayoutBlock>
