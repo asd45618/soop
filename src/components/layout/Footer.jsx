@@ -149,7 +149,11 @@ const Footer = () => {
           <div className="sns">
             <ul>
               <li>
-                <a href="https://www.facebook.com/soopent" target="_blank">
+                <a
+                  href="https://www.facebook.com/soopent"
+                  target="_blank"
+                  title="페이스북"
+                >
                   <FontAwesomeIcon icon={faFacebookF} />
                 </a>
               </li>
@@ -157,6 +161,7 @@ const Footer = () => {
                 <a
                   href="https://www.instagram.com/management_soop/"
                   target="_blank"
+                  title="인스타그램"
                 >
                   <FontAwesomeIcon icon={faInstagram} />
                 </a>
@@ -165,6 +170,7 @@ const Footer = () => {
                 <a
                   href="https://www.youtube.com/channel/UCPWLltIuHLCws1-O3B4ADtg"
                   target="_blank"
+                  title="유튜브"
                 >
                   <FontAwesomeIcon icon={faYoutube} />
                 </a>
@@ -173,17 +179,22 @@ const Footer = () => {
                 <a
                   href="https://post.naver.com/my.nhn?memberNo=22903361"
                   target="_blank"
+                  title="네이버 포스트"
                 >
                   <FontAwesomeIcon icon={faN} />
                 </a>
               </li>
               <li>
-                <a href="https://weverse.io/" target="_blank">
+                <a href="https://weverse.io/" target="_blank" title="위버스">
                   <FontAwesomeIcon icon={faV} />
                 </a>
               </li>
               <li>
-                <a href="https://tv.naver.com/soopent" target="_blank">
+                <a
+                  href="https://tv.naver.com/soopent"
+                  target="_blank"
+                  title="네이버 tv"
+                >
                   <FontAwesomeIcon icon={faPlay} />
                 </a>
               </li>

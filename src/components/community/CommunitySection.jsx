@@ -128,7 +128,7 @@ const CommunitySection = () => {
   const [currentCategory, setCurrentCategory] = useState("All");
   const categoryArr = ["All", "news", "interview", "notice"];
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 5;
 
   const list = useSelector((state) => state.communitys.currentList);
   const admin = useSelector((state) => state.members.admin);

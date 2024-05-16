@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { rankingDB } from "../../assets/firebase";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const RankingSectionBlock = styled.div`
   margin-bottom: 100px;
@@ -50,6 +51,8 @@ const RankingSection = () => {
 
   const user = useSelector((state) => state.members.user);
 
+  const navigate = useNavigate();
+
   const vote = async () => {
     if (user) {
       try {
@@ -64,6 +67,7 @@ const RankingSection = () => {
       }
     } else {
       alert("로그인 해주세요.");
+      navigate("/login");
     }
   };
 
@@ -128,11 +132,9 @@ const RankingSection = () => {
               <div>
                 {val.kname}(
                 {Math.round(
-                  (allNum.filter((item) => item.ename === val.ename)[0].vote /
-                    allVote) *
-                    100
+                  allNum.filter((item) => item.ename === val.ename)[0].vote
                 )}
-                %)
+                명)
               </div>
               <ProgressBar
                 now={Math.round(

@@ -32,7 +32,7 @@ const SliderSectionblock = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    margin:10px 0 0 40px;
+    margin: 10px 0 0 40px;
 
     ul {
       z-index: 99999;
@@ -113,17 +113,15 @@ const SliderSection = () => {
       )}
       <div className="artistMenu">
         <ul>
-          <li className={activeSlideIndex === 0 ? "active" : ""}>GONG YOO</li>
-          <li className={activeSlideIndex === 1 ? "active" : ""}>
-            KIM JAE-UCK
-          </li>
-          <li className={activeSlideIndex === 2 ? "active" : ""}>
-            NAM JOO-HYUK
-          </li>
-          <li className={activeSlideIndex === 3 ? "active" : ""}>
-            SEO HYUN-JIN
-          </li>
-          <li className={activeSlideIndex === 4 ? "active" : ""}>SUZY</li>
+          {artistSlider.map((val, idx) => (
+            <li
+              className={activeSlideIndex === idx ? "active" : ""}
+              key={idx}
+              onClick={() => goToArtist(val.name)}
+            >
+              {val.name}
+            </li>
+          ))}
         </ul>
       </div>
     </SliderSectionblock>
