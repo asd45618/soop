@@ -74,6 +74,7 @@ const CommunityDetailBlock = styled.div`
     .btn {
       display: flex;
       justify-content: right;
+      border: none;
       button {
         margin: 0 10px;
       }

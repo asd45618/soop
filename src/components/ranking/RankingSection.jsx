@@ -34,6 +34,7 @@ const RankingSectionBlock = styled.div`
     }
   }
   .btn {
+    border: none;
     button {
       padding: 10px;
       background: #669933;

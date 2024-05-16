@@ -74,6 +74,29 @@ const HeaderBlock = styled.div`
                   vertical-align: bottom;
                   display: none;
                 }
+                .view__profile {
+                  display: none;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  p {
+                    height: 40px;
+                    border: 1px solid #fff;
+                    border-radius: 20px;
+                    color: #fff;
+                    width: 180px;
+                    font-size: 16px;
+                    line-height: 40px;
+                    text-align: center;
+                    transition: all 0.5s;
+                    margin-bottom: 0;
+                    &:hover {
+                      color: #000;
+                      background: #fff;
+                    }
+                  }
+                }
               }
             }
           }
