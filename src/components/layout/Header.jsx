@@ -78,7 +78,7 @@ const HeaderBlock = styled.div`
                   transform: translate(-50%, -50%);
                   p {
                     height: 40px;
-                    border: 1px solid #fff;
+                    border: 0px solid #fff;
                     border-radius: 20px;
                     color: #fff;
                     width: 180px;
@@ -182,9 +182,10 @@ const HeaderBlock = styled.div`
           color: #333;
           font-weight: bold;
           margin: 0 20px;
+          &:hover { color: green; }
           &:hover .sub__menu {
             display: block;
-            color: green;
+            
           }
           .sub__menu {
             position: absolute;
