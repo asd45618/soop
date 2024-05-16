@@ -6,7 +6,17 @@ import { BsCartPlusFill } from "react-icons/bs";
 import { RiTreeFill, RiTreeLine } from "react-icons/ri";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMediaQuery } from "react-responsive";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleXmark,
+  faN,
+  faPlay,
+  faV,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebookF,
+  faInstagram,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMembers, userLogout } from "../../store/member";
 import Modal from "react-bootstrap/Modal";
@@ -16,10 +26,7 @@ const HeaderBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
   .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow: hidden;
+    position: absolute;
     width: 100%;
     height: 100%;
     .modal-dialog {
@@ -39,9 +46,9 @@ const HeaderBlock = styled.div`
         .modal-body {
           display: flex;
           justify-content: center;
+          align-items: center;
+
           .modal__data {
-            margin-bottom: 1rem;
-            padding: 4rem 0 0 2rem;
             li {
               width: 188px;
               height: 256px;
@@ -56,9 +63,6 @@ const HeaderBlock = styled.div`
                   .modal__data__name {
                     display: block;
                   }
-                  .view__profile {
-                    display: block;
-                  }
                 }
                 .modal__data__name {
                   color: #fff;
@@ -70,29 +74,6 @@ const HeaderBlock = styled.div`
                   vertical-align: bottom;
                   display: none;
                 }
-                .view__profile {
-                  display: none;
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  p {
-                    height: 40px;
-                    border: 1px solid #fff;
-                    border-radius: 20px;
-                    color: #fff;
-                    width: 180px;
-                    font-size: 16px;
-                    line-height: 40px;
-                    text-align: center;
-                    transition: all 0.5s;
-                    margin-bottom: 0;
-                    // &:hover {
-                    //   color: #000;
-                    //   background: #fff;
-                    // }
-                  }
-                }
               }
             }
           }
@@ -102,6 +83,23 @@ const HeaderBlock = styled.div`
           display: flex;
           justify-content: center;
           margin-bottom: 50px;
+          a {
+            margin-bottom: 150px;
+            display: inline-block;
+            height: 40px;
+            border: 0px solid #fff;
+            border-radius: 20px;
+            color: #fff;
+            width: 180px;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: center;
+            transition: all 0.5s;
+            &:hover {
+              color: #000;
+              background: #fff;
+            }
+          }
         }
         .xIcon {
           position: absolute;
@@ -135,9 +133,6 @@ const HeaderBlock = styled.div`
     }
   }
   .header__right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 40%;
     text-align: right;
     padding-right: 30px;
@@ -176,26 +171,22 @@ const HeaderBlock = styled.div`
           display: block;
         }
         li {
-          position: relative;
+          width: 140px;
           text-align: center;
           font-size: 18px;
           color: #333;
           font-weight: bold;
-          margin: 0 20px;
-          &:hover .sub__menu {
+          &:hover {
             display: block;
             color: green;
           }
+
           .sub__menu {
             position: absolute;
-            top: 100%;
-            left: -30px;
             padding-top: 33px;
             z-index: 999;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            display: none;
             li {
+              display: none;
               height: 36px;
               font-size: 15px;
               font-weight: normal;
@@ -204,20 +195,28 @@ const HeaderBlock = styled.div`
               }
             }
           }
-          &:last-child {
-            .sub__menu {
-              left: -15px;
-            }
-          }
         }
+        #blind {
+          position: absolute;
+          left: 0;
+          top: 110px;
+          width: 100%;
+          height: 0px;
+          z-index: 1;
+          background: rgba(255, 255, 255, 0.3);
+          transition: all 0.5s;
+        }
+      }
+      &:hover #blind {
+        height: 125px;
       }
     }
   }
 `;
 const ItemCart = styled.div`
   position: absolute;
-  top: 10px;
-  right: 40px;
+  top: -7px;
+  right: 35px;
   font-size: 25px;
   color: #669933;
   @media (max-width: 768px) {
@@ -344,6 +343,32 @@ const Header = () => {
             </Link>
           </ItemCart>
         </div>
+        <div className="sns">
+          <a href="https://www.facebook.com/soopent" target="_blank">
+            <FontAwesomeIcon icon={faFacebookF} />
+          </a>
+          <a href="https://www.instagram.com/management_soop/" target="_blank">
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+          <a
+            href="https://www.youtube.com/channel/UCPWLltIuHLCws1-O3B4ADtg"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faYoutube} />
+          </a>
+          <a
+            href="https://post.naver.com/my.nhn?memberNo=22903361"
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faN} />
+          </a>
+          <a href="https://weverse.io/" target="_blank">
+            <FontAwesomeIcon icon={faV} />
+          </a>
+          <a href="https://tv.naver.com/soopent" target="_blank">
+            <FontAwesomeIcon icon={faPlay} />
+          </a>
+        </div>
         {mobile || (
           <nav className="menu">
             <ul className="menu__group">
@@ -352,12 +377,6 @@ const Header = () => {
               </li>
               <li>
                 <NavLink to="/ranking">RANKING</NavLink>
-              </li>
-              <li>
-                <NavLink to="/artist">ARTIST</NavLink>
-              </li>
-              <li>
-                <NavLink to="/product">PRODUCT</NavLink>
               </li>
               <li>
                 <NavLink to="/company">COMPANY</NavLink>
@@ -374,6 +393,12 @@ const Header = () => {
                 </ul>
               </li>
               <li>
+                <NavLink to="/artist">ARTIST</NavLink>
+              </li>
+              <li>
+                <NavLink to="/product">PRODUCT</NavLink>
+              </li>
+              <li>
                 <NavLink to="/community">COMMUNITY</NavLink>
                 <ul className="sub__menu">
                   <li>
@@ -381,6 +406,7 @@ const Header = () => {
                   </li>
                 </ul>
               </li>
+              <div id="blind"></div>
             </ul>
           </nav>
         )}
@@ -425,6 +451,7 @@ const Header = () => {
                   </li>
                 </ul>
               </li>
+              <div id="blind"></div>
             </ul>
           </MobileNav>
         )}
@@ -434,7 +461,7 @@ const Header = () => {
           <Modal.Dialog>
             <Modal.Header>
               <Modal.Title>
-                MANAGEMENT SOOP <h2>OUR ARTIST PROFILE</h2>
+                MANAGEMENT SOOP <h2>OUR ARTIST</h2>
               </Modal.Title>
             </Modal.Header>
 
@@ -445,16 +472,17 @@ const Header = () => {
                     <Link to="/artist">
                       <img src={val.img} alt={val.name} />
                       <div className="modal__data__name">{val.name}</div>
-                      <div className="view__profile">
-                        <p>VIEW PROFILE</p>
-                      </div>
                     </Link>
                   </li>
                 ))}
               </ul>
             </Modal.Body>
 
-            <Modal.Footer></Modal.Footer>
+            <Modal.Footer>
+              <Link to="/artist" onClick={() => setModalOpen(false)}>
+                ARTIST PROFILE
+              </Link>
+            </Modal.Footer>
             <FontAwesomeIcon
               icon={faCircleXmark}
               className="xIcon"
