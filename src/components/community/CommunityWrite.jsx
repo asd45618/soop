@@ -19,6 +19,7 @@ const CommunityWriteBlock = styled.div`
     .btn {
       display: flex;
       justify-content: center;
+      border: none;
       button {
         margin: 0 10px;
       }

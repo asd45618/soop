@@ -87,10 +87,10 @@ const HeaderBlock = styled.div`
                     text-align: center;
                     transition: all 0.5s;
                     margin-bottom: 0;
-                    // &:hover {
-                    //   color: #000;
-                    //   background: #fff;
-                    // }
+                    &:hover {
+                      color: #000;
+                      background: #fff;
+                    }
                   }
                 }
               }
